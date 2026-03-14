@@ -1,0 +1,13 @@
+# Piggy Project Rules
+
+- Always use TypeScript with strict types.
+- Favor Functional Components and Hooks.
+- Security: All API routes must check auth session via Middleware.
+- SEO: Include metadata objects in all page.tsx files.
+- Performance: Use 'use server' for data fetching; avoid 'use client' unless interactive.
+- Style: Use Tailwind CSS with a consistent primary color of #FFD700 (Piggy Gold).
+
+- **Mobile First:** Always write Tailwind classes starting with mobile styles (e.g., `w-full md:w-1/2`).
+- **Interaction:** Every clickable element must have a clear `:active` state.
+- **Form UX:** Every input must have an associated `label` and correct `type` (email, tel, number).
+- **Layout:** Use `max-w-screen-xl` for desktop, but ensure padding `px-4` on mobile so content doesn't hit the screen edges.

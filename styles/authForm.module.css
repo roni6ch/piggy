@@ -1,0 +1,56 @@
+.input_group {
+  @apply flex items-stretch border border-gray-200 rounded-xl overflow-hidden;
+  position: relative;
+  min-width: 0;
+}
+
+.input_text {
+  @apply flex-1 min-w-0 py-3 px-4 sm:py-4 sm:px-6 bg-slate-50 text-base;
+  @apply focus:outline-none border-none rounded-none;
+  min-height: 44px;
+  color: #0f172a !important;
+  caret-color: #0f172a;
+}
+.input_text::placeholder {
+  color: #64748b !important;
+}
+
+.input_text + * {
+  @apply flex-shrink-0 py-2 pr-3 sm:py-3 sm:px-4;
+  color: #cbd5e1;
+  cursor: pointer;
+}
+
+.input_text:focus + * {
+  color: #6366f1;
+}
+
+.input_text:hover + *,
+.input_text + *:hover {
+  color: #6366f1;
+}
+
+.button {
+  border-width: 1px;
+  @apply w-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-md;
+  @apply py-3 text-gray-50 text-base sm:text-lg;
+  min-height: 44px;
+  @apply focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-offset-2;
+  @apply transition-colors;
+}
+
+.button:hover:not(:disabled) {
+  @apply bg-gradient-to-r from-blue-600 to-indigo-600;
+}
+
+.button:disabled {
+  @apply opacity-70 cursor-not-allowed;
+}
+.button_custom {
+  @apply w-full border py-3 flex justify-center items-center gap-2 hover:bg-gray-200;
+  min-height: 44px;
+  @apply text-sm sm:text-base;
+}
+.error {
+  margin: -8px 0 0;
+}

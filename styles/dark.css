@@ -1,0 +1,28 @@
+.dark .MuiOutlinedInput-notchedOutline,
+.dark .Mui-focused {
+  border-color: #000 !important;
+  color: #000 !important;
+}
+
+.dark .MuiFormLabel-root.MuiInputLabel-root,
+.dark .MuiButtonBase-root.MuiIconButton-root.MuiAutocomplete-popupIndicator,
+.dark .MuiButtonBase-root.MuiIconButton-root.MuiAutocomplete-clearIndicator {
+  color: #1f2937;
+}
+
+.dark .MuiAutocomplete-popper .MuiPaper-root {
+  background: #1f2937;
+  color: #fff;
+}
+
+
+.dark .MuiAutocomplete-listbox .MuiAutocomplete-option.Mui-focused {
+  background-color: #59869066;
+}
+.dark ul.MuiAutocomplete-listbox>li>div {
+  color: #55818c;
+}
+
+.dark .bgImg{
+  filter: brightness(50%)
+}

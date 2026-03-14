@@ -1,0 +1,4 @@
+.detailsWrapper {
+  @apply m-auto bg-slate-50 rounded-md w-screen grid lg:grid-cols-2;
+  height: calc(100vh - 64px);
+}

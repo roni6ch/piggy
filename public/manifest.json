@@ -1,0 +1,17 @@
+{
+  "name": "FID - Find your best deals",
+  "short_name": "FID",
+  "description": "Find your best deals. Search stores to see card discounts, coupons and credits in one place.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f3f4f6",
+  "theme_color": "#0ea5e9",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
