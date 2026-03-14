@@ -1,5 +1,6 @@
 import Head from 'next/head';
 import Card from '@/common/components/card';
+import PaymentNetworkIcon from '@/common/components/payment-network-icon';
 import SkeletonGrid from '@/common/components/skeleton-grid';
 import { useUserDataContext } from '@/common/context/userContext';
 import { Card as CardType, Club, Provider } from '@/common/types';
@@ -20,8 +21,10 @@ const CLUBS: { value: Club; label: string }[] = [
   { value: Club.HAPOALIM, label: 'Hapoalim' },
   { value: Club.ISRACARD, label: 'Isracard' },
   { value: Club.CAL, label: 'Cal' },
+  { value: Club.MIZRAHI, label: 'Mizrahi' },
   { value: Club.DINERS, label: 'Diners' },
   { value: Club.YOTER, label: 'Yoter' },
+  { value: Club.INTERNATIONAL, label: 'International' },
 ];
 
 const PROVIDERS: { value: Provider; label: string; icon: string }[] = [
@@ -41,6 +44,8 @@ const DEFAULT_BG: Record<string, string> = {
   yoter: '#434342',
   leumi: '#182957',
   hapoalim: 'grey',
+  mizrahi: '#182957',
+  international: 'grey',
 };
 
 function buildPreviewCard(club: Club | null, provider: Provider | null): CardType | null {
@@ -220,12 +225,11 @@ export default function Cards() {
                           aria-label={p.label}
                           title={p.label}
                         >
-                          <Image
-                            src={`/assets/cards-icons/${p.icon}.svg`}
+                          <PaymentNetworkIcon
+                            provider={p.value}
                             width={56}
                             height={56}
-                            alt={p.label}
-                            aria-hidden
+                            ariaHidden
                           />
                           <span className={styles.logoButtonTooltip}>{p.label}</span>
                         </button>
@@ -248,11 +252,11 @@ export default function Cards() {
                     )}
                     {selectedProvider && (
                       <div className={styles.chosenUnderStep} aria-hidden>
-                        <Image
-                          src={`/assets/cards-icons/${PROVIDERS.find((p) => p.value === selectedProvider)?.icon ?? 'visa'}.svg`}
+                        <PaymentNetworkIcon
+                          provider={selectedProvider}
                           width={28}
                           height={28}
-                          alt={PROVIDERS.find((p) => p.value === selectedProvider)?.label ?? selectedProvider}
+                          ariaHidden
                         />
                         <span className={styles.chosenLabel}>
                           {PROVIDERS.find((p) => p.value === selectedProvider)?.label ?? selectedProvider}

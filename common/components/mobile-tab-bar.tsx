@@ -36,7 +36,6 @@ export default function MobileTabBar() {
             key={tab.name}
             href={href}
             locale={router.locale}
-            prefetch={false}
             className={`
               flex flex-col items-center justify-center gap-0.5 flex-1 min-h-[44px] py-2
               text-gray-600 dark:text-gray-400 transition-colors

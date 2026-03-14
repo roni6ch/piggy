@@ -62,7 +62,7 @@ export function buildBestCombos(
   const summary =
     items.length > 0
       ? `We found ${items.length} deal(s) at your searched stores that match your cards. Use the card shown for each to get the discount.`
-      : 'No deals at these stores match your current cards. Add more cards in Settings to see personalized deals.';
+      : '';
 
   return { summary, items };
 }

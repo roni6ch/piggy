@@ -35,7 +35,6 @@ const Header = () => {
       <Link
         href={Routes.HOME}
         locale={locale}
-        prefetch
         className="inline-flex items-center justify-center min-w-[44px] min-h-[44px] -m-1"
         aria-label={t('header.navigation.home', { defaultValue: 'Home' })}
       >
@@ -58,7 +57,6 @@ const Header = () => {
           locale={locale}
           href={navItem.href}
           key={navItem.name}
-          prefetch
           className={classNames(
             isActive(navItem)
               ? 'bg-gray-900 text-white'
@@ -84,16 +82,15 @@ const Header = () => {
             <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
               <span className="sr-only">{t('header.openUserMenu')}</span>
               {showSsoAvatar ? (
-                <Image
-                  key={avatarSrc}
-                  className="h-8 w-8 rounded-full object-cover"
-                  width={32}
-                  height={32}
-                  src={avatarSrc}
-                  alt="user profile image"
-                  sizes="32px"
-                  unoptimized
-                />
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gray-700 ring-2 ring-gray-600">
+                  <img
+                    key={avatarSrc}
+                    src={avatarSrc}
+                    alt="user profile"
+                    className="h-8 w-8 w-full rounded-full object-cover object-center"
+                    referrerPolicy="no-referrer"
+                  />
+                </span>
               ) : (
                 <span className="flex h-8 w-8 items-center justify-center rounded-full bg-gray-600 text-sm font-medium text-white">
                   {(session?.user?.email?.[0] ?? session?.user?.name?.[0] ?? '?').toString().toUpperCase()}
@@ -117,7 +114,6 @@ const Header = () => {
                     <Link
                       locale={locale}
                       href={item.href}
-                      prefetch={item.href !== Routes.LOGIN}
                       onClick={
                         item.name === ProfilePageName.SIGN_OUT
                           ? () => signOut({ redirect: false, callbackUrl: '/' })
@@ -159,16 +155,15 @@ const Header = () => {
         <div className="flex items-center px-5">
           <div className="flex-shrink-0">
             {showSsoAvatar ? (
-              <Image
-                key={avatarSrc}
-                className="h-10 w-10 rounded-full object-cover"
-                width={40}
-                height={40}
-                src={avatarSrc}
-                alt="user profile image"
-                sizes="40px"
-                unoptimized
-              />
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden rounded-full bg-gray-700 ring-2 ring-gray-600">
+                <img
+                  key={avatarSrc}
+                  src={avatarSrc}
+                  alt="user profile"
+                  className="h-10 w-10 w-full rounded-full object-cover object-center"
+                  referrerPolicy="no-referrer"
+                />
+              </span>
             ) : (
               <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-600 text-sm font-medium text-white">
                 {(session?.user?.email?.[0] ?? session?.user?.name?.[0] ?? '?').toString().toUpperCase()}
@@ -191,7 +186,6 @@ const Header = () => {
               locale={locale}
               key={item.name}
               href={item.href}
-              prefetch={item.href !== Routes.LOGIN}
               onClick={
                 item.name === ProfilePageName.SIGN_OUT
                   ? () => signOut({ redirect: false, callbackUrl: '/' })

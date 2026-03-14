@@ -28,6 +28,12 @@ export const aiSearchBodySchema = z.object({
   query: z.string().min(1, 'query is required').max(500).trim(),
 });
 
+export const placesSearchBodySchema = z.object({
+  query: z.string().min(1, 'query is required').max(500).trim(),
+  lat: z.number().optional(),
+  lng: z.number().optional(),
+});
+
 export const cardsQuerySchema = z.object({
   id: z.string().optional(),
   limit: z.coerce.number().int().min(1).max(100).optional().default(10),
@@ -39,4 +45,5 @@ export type AddCardBody = z.infer<typeof addCardBodySchema>;
 export type RegisterBody = z.infer<typeof registerBodySchema>;
 export type ProfilePatchBody = z.infer<typeof profilePatchBodySchema>;
 export type AiSearchBody = z.infer<typeof aiSearchBodySchema>;
+export type PlacesSearchBody = z.infer<typeof placesSearchBodySchema>;
 export type CardsQuery = z.infer<typeof cardsQuerySchema>;

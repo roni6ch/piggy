@@ -62,7 +62,8 @@ function MyApp({
   return (
     <div className={poppins.className}>
       <ThemeProvider enableSystem={true} attribute="class">
-        <SessionProvider session={session}>
+        {/* Session from page getServerSideProps avoids client fetch; refetchOnWindowFocus=false reduces extra /api/auth/session calls. */}
+        <SessionProvider session={session} refetchOnWindowFocus={false} refetchWhenOffline={false} refetchInterval={0}>
           <RouteChangeIndicator />
           <UserDataProvider>
             <Main>

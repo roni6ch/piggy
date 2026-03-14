@@ -21,11 +21,18 @@ export default async function handler(
       }
       const body = typeof req.body === 'object' && req.body != null ? req.body : {};
       const display =
-        body.name != null
+        body.name != null || body.imageSrc != null || body.imageSrcBig != null
           ? {
-              name: String(body.name),
+              name: body.name != null ? String(body.name) : undefined,
               imageSrc: body.imageSrc != null ? String(body.imageSrc) : undefined,
               imageSrcBig: body.imageSrcBig != null ? String(body.imageSrcBig) : undefined,
+              address: body.address != null ? String(body.address) : undefined,
+              rating: body.rating != null ? Number(body.rating) : undefined,
+              userRatingsTotal: body.userRatingsTotal != null ? Number(body.userRatingsTotal) : undefined,
+              openingHours: body.openingHours != null ? String(body.openingHours) : undefined,
+              openingHoursWeekdays: Array.isArray(body.openingHoursWeekdays) ? body.openingHoursWeekdays.map(String) : undefined,
+              phone: body.phone != null ? String(body.phone) : undefined,
+              website: body.website != null ? String(body.website) : undefined,
             }
           : undefined;
 

@@ -58,6 +58,7 @@ function ItemCard<T extends BusinessType | CategoryType>({
 }) {
   const [imgError, setImgError] = useState(false);
   const usePlaceholder = !item.imageSrc || imgError;
+  const isProxyOrExternal = item.imageSrc.startsWith('/api/') || item.imageSrc.startsWith('http') || item.imageSrc.startsWith('data:');
 
   return (
     <button
@@ -76,6 +77,14 @@ function ItemCard<T extends BusinessType | CategoryType>({
             loading="lazy"
             decoding="async"
           />
+        ) : isProxyOrExternal ? (
+          <img
+            src={item.imageSrc}
+            alt={item.name}
+            className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
+            loading="lazy"
+            onError={() => setImgError(true)}
+          />
         ) : (
           <Image
             fill
@@ -85,7 +94,6 @@ function ItemCard<T extends BusinessType | CategoryType>({
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             loading="lazy"
             onError={() => setImgError(true)}
-            unoptimized={item.imageSrc.startsWith('http') || item.imageSrc.startsWith('data:')}
           />
         )}
       </div>
@@ -93,24 +101,27 @@ function ItemCard<T extends BusinessType | CategoryType>({
         <span className="font-semibold text-gray-800 dark:text-gray-100 text-sm sm:text-base">
           {label}
         </span>
-        {'imageSrcBig' in item && (
-          <>
-            <p className="text-xs text-amber-600 dark:text-amber-400 mt-1">
-              ★ {'rating' in item && item.rating != null ? Number(item.rating).toFixed(1) : '—'}
-              {'userRatingsTotal' in item && item.userRatingsTotal != null && item.userRatingsTotal > 0 && (
-                <span className="text-gray-500 dark:text-gray-400 ml-1">({item.userRatingsTotal})</span>
-              )}
-            </p>
-            <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 truncate">
-              {'openingHours' in item && item.openingHours ? item.openingHours : '—'}
-            </p>
-            {'address' in item && item.address && (
-              <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 truncate">
-                {item.address}
+        {(() => {
+          const biz = item as Partial<Pick<BusinessType, 'rating' | 'userRatingsTotal' | 'openingHours' | 'address'>>;
+          return (
+            <>
+              <p className="text-xs text-amber-600 dark:text-amber-400 mt-1">
+                ★ {biz.rating != null ? Number(biz.rating).toFixed(1) : '—'}
+                {biz.userRatingsTotal != null && biz.userRatingsTotal > 0 && (
+                  <span className="text-gray-500 dark:text-gray-400 ml-1">({biz.userRatingsTotal})</span>
+                )}
               </p>
-            )}
-          </>
-        )}
+              <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 truncate">
+                {biz.openingHours ?? '—'}
+              </p>
+              {biz.address ? (
+                <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5 truncate">
+                  {biz.address}
+                </p>
+              ) : null}
+            </>
+          );
+        })()}
       </div>
     </button>
   );

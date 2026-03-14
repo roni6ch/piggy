@@ -1,4 +1,4 @@
-import { forwardRef } from 'react';
+import { forwardRef, useState, useEffect } from 'react';
 import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { Business as BusinessType, Card as CardType, DealDocument, StoreDeal } from '@/common/types';
@@ -62,6 +62,12 @@ const Business = ({
     ? storeDeals
     : (activeBusiness ? getMockStoreDeals(activeBusiness.name, activeBusiness._id) : []);
 
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  useEffect(() => {
+    setImageLoaded(false);
+  }, [activeBusiness?.imageSrcBig, activeBusiness?._id]);
+
   const Header = () => (
     <AppBar position="sticky" className="bg-white dark:bg-gray-900 shadow-sm">
       <Toolbar className="min-h-[56px]">
@@ -92,22 +98,45 @@ const Business = ({
     ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(activeBusiness.address)}`
     : '';
 
+  const rawId = activeBusiness?._id ?? '';
+  const placeId = rawId.startsWith('place_') ? rawId.replace(/^place_/, '') : (rawId.startsWith('ChIJ') ? rawId : '');
+  const reviewsUrl = placeId
+    ? `https://www.google.com/maps/place/?q=place_id:${encodeURIComponent(placeId)}`
+    : '';
+
   const content = (
     <>
       <Header />
       <div className="flex flex-col min-h-screen overflow-hidden">
         <div className="flex-1 overflow-y-auto overflow-x-hidden min-h-0">
-          {/* Fixed-height image: no scroll-driven animation, so cards below don't re-render or flash */}
-          <div className="relative w-full h-[200px] sm:h-[240px] md:h-[260px] bg-gray-200 dark:bg-gray-800 shrink-0">
+          {/* Fixed-height image: skeleton until loaded, then image or name placeholder */}
+          <div className="relative w-full h-[200px] sm:h-[240px] md:h-[260px] bg-gray-200 dark:bg-gray-800 shrink-0 overflow-hidden">
             {activeBusiness?.imageSrcBig ? (
-              <Image
-                fill
-                src={activeBusiness.imageSrcBig}
-                alt={activeBusiness.name}
-                className="object-cover"
-                sizes="100vw"
-                unoptimized={activeBusiness.imageSrcBig.startsWith('http')}
-              />
+              <>
+                {!imageLoaded && (
+                  <div className="absolute inset-0 bg-gray-300 dark:bg-gray-600 animate-pulse flex items-center justify-center" aria-hidden>
+                    <div className="h-12 w-12 rounded-full border-4 border-gray-400 dark:border-gray-500 border-t-transparent dark:border-t-transparent animate-spin" />
+                  </div>
+                )}
+                {activeBusiness.imageSrcBig.startsWith('http') ||
+                activeBusiness.imageSrcBig.includes('/api/place-photo') ? (
+                  <img
+                    src={activeBusiness.imageSrcBig}
+                    alt={activeBusiness.name}
+                    className="absolute inset-0 w-full h-full object-cover"
+                    onLoad={() => setImageLoaded(true)}
+                  />
+                ) : (
+                  <Image
+                    fill
+                    src={activeBusiness.imageSrcBig}
+                    alt={activeBusiness.name}
+                    className="object-cover"
+                    sizes="100vw"
+                    onLoad={() => setImageLoaded(true)}
+                  />
+                )}
+              </>
             ) : (
               <div className="absolute inset-0 flex items-center justify-center text-gray-400 dark:text-gray-500 text-lg">
                 {activeBusiness?.name}
@@ -119,20 +148,34 @@ const Business = ({
             <h1 className="text-2xl sm:text-3xl font-semibold text-gray-900 dark:text-gray-100 mb-2 text-center">
               {activeBusiness?.name}
             </h1>
-            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-sm text-gray-600 dark:text-gray-400 mb-2">
-              <span className="text-amber-600 dark:text-amber-400 font-medium">
-                ★ {activeBusiness?.rating != null ? activeBusiness.rating.toFixed(1) : t('business.noRating')}
-                {activeBusiness?.userRatingsTotal != null && activeBusiness.userRatingsTotal > 0 && (
-                  <span className="text-gray-500 dark:text-gray-400 font-normal ml-1">
-                    ({activeBusiness.userRatingsTotal} {t('business.reviews', 'reviews')})
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4 text-sm text-gray-600 dark:text-gray-400">
+              <div className="flex flex-col gap-y-1.5">
+                {reviewsUrl ? (
+                  <a
+                    href={reviewsUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#FFD700] font-medium hover:underline inline-flex items-center gap-1"
+                    aria-label={t('business.viewReviews', 'View reviews on Google Maps')}
+                  >
+                    ★ {activeBusiness?.rating != null ? activeBusiness.rating.toFixed(1) : t('business.noRating')}
+                    {activeBusiness?.userRatingsTotal != null && activeBusiness.userRatingsTotal > 0 && (
+                      <span className="text-gray-500 dark:text-gray-400 font-normal">
+                        ({activeBusiness.userRatingsTotal} {t('business.reviews', 'reviews')})
+                      </span>
+                    )}
+                  </a>
+                ) : (
+                  <span className="text-[#FFD700] font-medium">
+                    ★ {activeBusiness?.rating != null ? activeBusiness.rating.toFixed(1) : t('business.noRating')}
+                    {activeBusiness?.userRatingsTotal != null && activeBusiness.userRatingsTotal > 0 && (
+                      <span className="text-gray-500 dark:text-gray-400 font-normal ml-1">
+                        ({activeBusiness.userRatingsTotal} {t('business.reviews', 'reviews')})
+                      </span>
+                    )}
                   </span>
                 )}
-              </span>
-              <span>{activeBusiness?.openingHours ?? t('business.hoursVary')}</span>
-            </div>
-            {(activeBusiness?.address || activeBusiness?.phone || activeBusiness?.website) && (
-              <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-600 dark:text-gray-400 mb-4 justify-center">
-                {activeBusiness.address && (
+                {activeBusiness?.address && (
                   <a
                     href={mapsUrl}
                     target="_blank"
@@ -143,16 +186,27 @@ const Business = ({
                     {activeBusiness.address}
                   </a>
                 )}
-                {activeBusiness.phone && (
+                {activeBusiness?.phone && (
                   <a href={`tel:${activeBusiness.phone}`} className="hover:underline">{activeBusiness.phone}</a>
                 )}
-                {activeBusiness.website && (
+                {activeBusiness?.website && (
                   <a href={activeBusiness.website.startsWith('http') ? activeBusiness.website : `https://${activeBusiness.website}`} target="_blank" rel="noopener noreferrer" className="hover:underline">
                     {t('business.website', 'Website')}
                   </a>
                 )}
               </div>
-            )}
+              {(activeBusiness?.openingHoursWeekdays?.length || activeBusiness?.openingHours) && (
+                <div className="flex flex-col gap-y-0.5">
+                  {activeBusiness?.openingHoursWeekdays?.length
+                    ? activeBusiness.openingHoursWeekdays.map((line, i) => (
+                        <div key={i}>{line}</div>
+                      ))
+                    : activeBusiness?.openingHours
+                      ? <span>{activeBusiness.openingHours}</span>
+                      : null}
+                </div>
+              )}
+            </div>
             <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">
               {t('business.dealsSubtitle')}
             </p>
@@ -206,9 +260,7 @@ const Business = ({
               <h2 className="text-sm font-medium uppercase tracking-wide text-gray-500 dark:text-gray-400 mb-3">
                 {t('business.cardDeals')}
               </h2>
-              {!dealsByBusiness?.length ? (
-                <p className="text-gray-500 dark:text-gray-400 text-sm">{t('business.noDeals')}</p>
-              ) : (
+              {dealsByBusiness?.length ? (
                 <RadioGroup className="space-y-3">
                   {dealsByBusiness.map((deal: DealDocument) => (
                     <RadioGroup.Option
@@ -236,6 +288,19 @@ const Business = ({
                     </RadioGroup.Option>
                   ))}
                 </RadioGroup>
+              ) : (userData.cards?.length ?? 0) > 0 ? (
+                <div className="space-y-3">
+                  <p className="text-gray-500 dark:text-gray-400 text-sm mb-2">{t('cards.myCardsTitle', 'My cards')}</p>
+                  <ul className="grid grid-cols-1 sm:grid-cols-2 gap-3" role="list">
+                    {userData.cards.map((c) => (
+                      <li key={c._id} className="rounded-xl border border-gray-200 dark:border-gray-600 bg-white dark:bg-gray-800 p-3">
+                        <Card card={c} noAnimation />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <p className="text-gray-500 dark:text-gray-400 text-sm">{t('business.noDeals')}</p>
               )}
             </section>
           </div>

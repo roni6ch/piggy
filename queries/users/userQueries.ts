@@ -15,6 +15,13 @@ type StoredSearchEntry = {
   name?: string;
   imageSrc?: string;
   imageSrcBig?: string;
+  address?: string;
+  rating?: number;
+  userRatingsTotal?: number;
+  openingHours?: string;
+  openingHoursWeekdays?: string[];
+  phone?: string;
+  website?: string;
 };
 
 function normalizeEmail(email: string): string {
@@ -68,6 +75,13 @@ export const getUserByEmail = async (
           ...(s.name != null && { name: s.name }),
           ...(s.imageSrc != null && { imageSrc: s.imageSrc }),
           ...(s.imageSrcBig != null && { imageSrcBig: s.imageSrcBig }),
+          ...(s.address != null && { address: s.address }),
+          ...(s.rating != null && { rating: s.rating }),
+          ...(s.userRatingsTotal != null && { userRatingsTotal: s.userRatingsTotal }),
+          ...(s.openingHours != null && { openingHours: s.openingHours }),
+          ...(s.openingHoursWeekdays != null && { openingHoursWeekdays: s.openingHoursWeekdays }),
+          ...(s.phone != null && { phone: s.phone }),
+          ...(s.website != null && { website: s.website }),
         })
       ),
       createdAt: data?.createdAt ? timestampToDate(data.createdAt) : undefined,
@@ -105,6 +119,13 @@ export const getUserByEmailWithPassword = async (
           ...(s.name != null && { name: s.name }),
           ...(s.imageSrc != null && { imageSrc: s.imageSrc }),
           ...(s.imageSrcBig != null && { imageSrcBig: s.imageSrcBig }),
+          ...(s.address != null && { address: s.address }),
+          ...(s.rating != null && { rating: s.rating }),
+          ...(s.userRatingsTotal != null && { userRatingsTotal: s.userRatingsTotal }),
+          ...(s.openingHours != null && { openingHours: s.openingHours }),
+          ...(s.openingHoursWeekdays != null && { openingHoursWeekdays: s.openingHoursWeekdays }),
+          ...(s.phone != null && { phone: s.phone }),
+          ...(s.website != null && { website: s.website }),
         })
       ),
       createdAt: data?.createdAt ? timestampToDate(data.createdAt) : undefined,
@@ -307,12 +328,23 @@ export const deleteUserCardById = async (
   }
 };
 
-const RECENT_SEARCHES_MAX = 12;
+const RECENT_SEARCHES_MAX = 10;
 
 export const addRecentSearch = async (
   email: string,
   businessId: string,
-  display?: { name: string; imageSrc?: string; imageSrcBig?: string }
+  display?: {
+    name?: string;
+    imageSrc?: string;
+    imageSrcBig?: string;
+    address?: string;
+    rating?: number;
+    userRatingsTotal?: number;
+    openingHours?: string;
+    openingHoursWeekdays?: string[];
+    phone?: string;
+    website?: string;
+  }
 ): Promise<void> => {
   const db = getFirestore();
   const userRef = db.collection(USERS).doc(normalizeEmail(email));
@@ -325,9 +357,16 @@ export const addRecentSearch = async (
   const entry: StoredSearchEntry = {
     term: businessId,
     createdAt: now,
-    ...(display?.name && { name: display.name }),
+    ...(display?.name != null && { name: display.name }),
     ...(display?.imageSrc != null && { imageSrc: display.imageSrc }),
     ...(display?.imageSrcBig != null && { imageSrcBig: display.imageSrcBig }),
+    ...(display?.address != null && { address: display.address }),
+    ...(display?.rating != null && { rating: display.rating }),
+    ...(display?.userRatingsTotal != null && { userRatingsTotal: display.userRatingsTotal }),
+    ...(display?.openingHours != null && { openingHours: display.openingHours }),
+    ...(display?.openingHoursWeekdays != null && { openingHoursWeekdays: display.openingHoursWeekdays }),
+    ...(display?.phone != null && { phone: display.phone }),
+    ...(display?.website != null && { website: display.website }),
   };
   const next = [entry, ...searches.filter((s) => s.term !== businessId)].slice(0, RECENT_SEARCHES_MAX);
   await userRef.update({ searches: next });
@@ -346,27 +385,38 @@ export const getUserRecentSearches = async (
   const withBusiness = await Promise.all(
     raw.map(async (s) => {
       const termId = typeof s.term === 'string' ? s.term : (s.term as BusinessDocument)._id;
-      const storedName = s.name;
-      const storedImageSrc = s.imageSrc;
-      const storedImageSrcBig = s.imageSrcBig;
       const snap = await db.collection(BUSINESSES).doc(termId).get();
       if (!snap.exists) {
         const fallback: BusinessDocument = {
           _id: termId,
-          name: storedName ?? termId,
-          imageSrc: storedImageSrc ?? '',
-          imageSrcBig: storedImageSrcBig ?? '',
+          name: s.name ?? termId,
+          imageSrc: s.imageSrc ?? '',
+          imageSrcBig: s.imageSrcBig ?? '',
           createdAt: timestampToDate(s.createdAt),
+          ...(s.address != null && { address: s.address }),
+          ...(s.rating != null && { rating: s.rating }),
+          ...(s.userRatingsTotal != null && { userRatingsTotal: s.userRatingsTotal }),
+          ...(s.openingHours != null && { openingHours: s.openingHours }),
+          ...(s.openingHoursWeekdays != null && { openingHoursWeekdays: s.openingHoursWeekdays }),
+          ...(s.phone != null && { phone: s.phone }),
+          ...(s.website != null && { website: s.website }),
         };
         return { term: fallback, createdAt: s.createdAt } as SearchDocument;
       }
       const d = snap.data()!;
       const business: BusinessDocument = {
         _id: snap.id,
-        name: d.name,
-        imageSrc: d.imageSrc,
-        imageSrcBig: d.imageSrcBig,
-        createdAt: timestampToDate(d.createdAt),
+        name: (d.name ?? s.name) ?? '',
+        imageSrc: (d.imageSrc ?? s.imageSrc) ?? '',
+        imageSrcBig: (d.imageSrcBig ?? s.imageSrcBig) ?? '',
+        createdAt: timestampToDate(d.createdAt ?? s.createdAt),
+        ...(d.address != null || s.address != null ? { address: d.address ?? s.address } : {}),
+        ...(d.rating != null || s.rating != null ? { rating: d.rating ?? s.rating } : {}),
+        ...(d.userRatingsTotal != null || s.userRatingsTotal != null ? { userRatingsTotal: d.userRatingsTotal ?? s.userRatingsTotal } : {}),
+        ...(d.openingHours != null || s.openingHours != null ? { openingHours: d.openingHours ?? s.openingHours } : {}),
+        ...(d.openingHoursWeekdays != null || s.openingHoursWeekdays != null ? { openingHoursWeekdays: (d.openingHoursWeekdays ?? s.openingHoursWeekdays) as string[] } : {}),
+        ...(d.phone != null || s.phone != null ? { phone: d.phone ?? s.phone } : {}),
+        ...(d.website != null || s.website != null ? { website: d.website ?? s.website } : {}),
       };
       return { term: business, createdAt: s.createdAt } as SearchDocument;
     })

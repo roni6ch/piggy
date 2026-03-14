@@ -8,6 +8,7 @@ import {
 } from '../types';
 import Image from 'next/image';
 import CheckIcon from '@mui/icons-material/Check';
+import PaymentNetworkIcon from './payment-network-icon';
 
 export default function Card({
   card,
@@ -49,40 +50,15 @@ export default function Card({
     );
   };
 
-  const Provider = ({ provider }: { provider: ProviderType }) => {
-    let logo: string | null = null;
-    switch (provider) {
-      case ProviderType.MASTERCARD:
-        logo = 'mastercard';
-        break;
-      case ProviderType.VISA:
-        logo = 'visa';
-        break;
-      case ProviderType.AMEX:
-        logo = 'amex';
-        break;
-      case ProviderType.DINERS:
-        logo = 'diners';
-        break;
-      case ProviderType.BIT:
-        logo = 'bit';
-        break;
-    }
-    
-    return (
-      <>
-        {logo && (
-          <Image
-            src={`/assets/cards-icons/${logo}.svg`}
-            width="50"
-            height="50"
-            className={styles.logo}
-            alt={`${provider} logo`}
-          />
-        )}
-      </>
-    );
-  };
+  const ProviderLogo = ({ provider }: { provider: ProviderType }) => (
+    <PaymentNetworkIcon
+      provider={provider}
+      width={50}
+      height={50}
+      className={styles.logo}
+      ariaHidden
+    />
+  );
 
   const Club = ({ club }: { club: ClubType }) => {
     return (
@@ -137,7 +113,7 @@ export default function Card({
         >
           <Club club={card.club} />
           <p className={styles.heading}>{card.provider}</p>
-          <Provider provider={card.provider} />
+          <ProviderLogo provider={card.provider} />
           <CHIP />
           <WIFI />
           <p className={styles.number}>1234 5678 1234 5678</p>

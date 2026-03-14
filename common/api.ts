@@ -1,7 +1,8 @@
-import { Card, Category, Business, Network, Deals, RecentSearch, AiSearchResponse } from '@/common/types';
+import { Card, Category, Business, Network, Deals, RecentSearch, AiSearchResponse, GooglePlace } from '@/common/types';
 
 export enum REQ_URLS {
     AI_SEARCH = `/api/ai-search`,
+    PLACES_SEARCH = `/api/places-search`,
     SEARCH_PLACEHOLDER = `/api/search-placeholder`,
     CATEGORIES = `/api/categories`,
     BUSINESSES = `/api/businesses`,
@@ -215,18 +216,54 @@ export async function addTermToRecentSearch({
     name,
     imageSrc,
     imageSrcBig,
+    address,
+    rating,
+    userRatingsTotal,
+    openingHours,
+    openingHoursWeekdays,
+    phone,
+    website,
 }: {
     userMail?: string;
     businessId: string;
     name?: string;
     imageSrc?: string;
     imageSrcBig?: string;
+    address?: string;
+    rating?: number;
+    userRatingsTotal?: number;
+    openingHours?: string;
+    openingHoursWeekdays?: string[];
+    phone?: string;
+    website?: string;
 }) {
     if (userMail && businessId) {
+        const payload =
+            name != null ||
+            imageSrc != null ||
+            imageSrcBig != null ||
+            address != null ||
+            rating != null ||
+            openingHours != null ||
+            phone != null ||
+            website != null
+                ? {
+                      name,
+                      imageSrc,
+                      imageSrcBig,
+                      address,
+                      rating,
+                      userRatingsTotal,
+                      openingHours,
+                      openingHoursWeekdays,
+                      phone,
+                      website,
+                  }
+                : {};
         const res = await fetch(`${BASE_URL}${REQ_URLS.USERS}/${userMail}/recent-searches/${encodeURIComponent(businessId)}`, {
             method: Network.POST,
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(name != null ? { name, imageSrc, imageSrcBig } : {}),
+            body: JSON.stringify(payload),
         });
         return parseJsonOr<unknown>(res, null);
     }
@@ -338,5 +375,27 @@ export async function aiSearch(query: string): Promise<AiSearchResponse> {
         throw new Error(err.error || res.statusText);
     }
     return res.json() as Promise<AiSearchResponse>;
+}
+
+/** Google Places text search – closest businesses by query (e.g. "Coffee" → Aroma, Cafe Cafe). */
+export async function placesSearch(
+    query: string,
+    options?: { lat?: number; lng?: number }
+): Promise<GooglePlace[]> {
+    const res = await fetch(`${BASE_URL}${REQ_URLS.PLACES_SEARCH}`, {
+        method: Network.POST,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            query: query.trim(),
+            lat: options?.lat,
+            lng: options?.lng,
+        }),
+    });
+    if (!res.ok) {
+        const err = await parseJsonOr<{ error?: string }>(res, {});
+        throw new Error(err.error || res.statusText);
+    }
+    const json = (await res.json()) as { places?: GooglePlace[] };
+    return json.places ?? [];
 }
 

@@ -95,6 +95,8 @@ export enum Club {
   YOTER = 'yoter',
   LEUMI = 'leumi',
   HAPOALIM = 'hapoalim',
+  MIZRAHI = 'mizrahi',
+  INTERNATIONAL = 'international',
 }
 
 export enum CardBackground {
@@ -112,6 +114,8 @@ export type Business = {
   imageSrcBig: string;
   /** Optional: e.g. "Open today 9:00 – 21:00" or "Closed" */
   openingHours?: string;
+  /** Optional: all weekdays (Sun–Sat) from Google Places. */
+  openingHoursWeekdays?: string[];
   /** Optional: Google or mock rating 0–5 */
   rating?: number;
   userRatingsTotal?: number;
@@ -211,4 +215,21 @@ export type AiSearchResponse = {
     items: BestComboItem[];
   };
   message?: string;
-}
+};
+
+/** Google Places API (New) search result – normalized for UI (closest businesses by name/query). */
+export type GooglePlace = {
+  placeId: string;
+  name: string;
+  address?: string;
+  /** National-format phone number from Places API. */
+  phone?: string;
+  rating?: number;
+  userRatingsTotal?: number;
+  /** Photo resource name for Place Photos (New) – use with /api/place-photo to get image URL. */
+  photoName?: string;
+  /** Human-readable opening hours for today when available. */
+  openingHours?: string;
+  /** All weekdays (Sun–Sat), e.g. ["Sunday: 6:30 AM – 9:00 PM", ...]. */
+  openingHoursWeekdays?: string[];
+};

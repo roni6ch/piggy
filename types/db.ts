@@ -34,6 +34,13 @@ export interface SearchDocument {
   name?: string;
   imageSrc?: string;
   imageSrcBig?: string;
+  address?: string;
+  rating?: number;
+  userRatingsTotal?: number;
+  openingHours?: string;
+  openingHoursWeekdays?: string[];
+  phone?: string;
+  website?: string;
 }
 
 export interface CardDocument {
@@ -63,6 +70,7 @@ export interface BusinessDocument {
   imageSrcBig: string;
   createdAt: Date;
   openingHours?: string;
+  openingHoursWeekdays?: string[];
   rating?: number;
   userRatingsTotal?: number;
   address?: string;

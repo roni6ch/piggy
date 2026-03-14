@@ -39,9 +39,22 @@ const Main = ({ children = <></> }: { children: React.ReactNode }) => {
       getRecentSearches({ userMail: email }),
     ])
       .then(([cards, coupons, recentSearchesResponse]) => {
-        const terms = (recentSearchesResponse ?? [])
+        const rawTerms = (recentSearchesResponse ?? [])
           .map((r: { term: unknown }) => r.term)
-          .filter((t: unknown): t is Business => t != null && typeof t === 'object' && '_id' in t && 'name' in t);
+          .filter((t: unknown): t is Record<string, unknown> => t != null && typeof t === 'object' && '_id' in t && 'name' in t);
+        const terms: Business[] = rawTerms.map((t) => ({
+          _id: String(t._id),
+          name: String(t.name),
+          imageSrc: typeof t.imageSrc === 'string' ? t.imageSrc : '',
+          imageSrcBig: typeof t.imageSrcBig === 'string' ? t.imageSrcBig : '',
+          address: typeof t.address === 'string' ? t.address : undefined,
+          rating: typeof t.rating === 'number' ? t.rating : undefined,
+          userRatingsTotal: typeof t.userRatingsTotal === 'number' ? t.userRatingsTotal : undefined,
+          openingHours: typeof t.openingHours === 'string' ? t.openingHours : undefined,
+          openingHoursWeekdays: Array.isArray(t.openingHoursWeekdays) ? (t.openingHoursWeekdays as string[]) : undefined,
+          phone: typeof t.phone === 'string' ? t.phone : undefined,
+          website: typeof t.website === 'string' ? t.website : undefined,
+        }));
         setUserData((prev) => ({
           ...prev,
           cards: cards ?? [],
@@ -97,7 +110,6 @@ const Main = ({ children = <></> }: { children: React.ReactNode }) => {
           alt=""
           src={mountains}
           placeholder="blur"
-          priority
           quality={80}
           fill
           sizes="100vw"
