@@ -4,27 +4,80 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
 import { Business as BusinessType, DealDocument, Routes } from '@/common/types';
-import { useState, useMemo } from 'react';
+import type { DiscoveryCategoryType } from '@/common/types';
+import { useState, useMemo, useEffect } from 'react';
 import Items from '@/common/components/items';
 import { getCategoryById } from '@/queries/categories/categoryQueries';
-import { getDealsByBusiness } from '@/common/api';
+import { getDealsByBusiness, getDiscoverBusinesses } from '@/common/api';
 import { GetServerSideProps } from 'next';
+import { getServerSession } from 'next-auth';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { getDiscoveryCategoryTypeFromName } from '@/lib/discover-businesses';
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
 
 const Business = dynamic(() => import('@/common/components/business'), { ssr: false });
+
+const PLACEHOLDER_IMAGE = 'data:image/svg+xml,' + encodeURIComponent(
+  '<svg xmlns="http://www.w3.org/2000/svg" width="400" height="280" viewBox="0 0 400 280"><rect fill="%239ca3af" width="400" height="280"/><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="%236b7280" font-family="sans-serif" font-size="18">No image</text></svg>'
+);
+
+/** Shared in-flight promise per category so Strict Mode double-mount only triggers one request. */
+const discoverPendingByCategory = new Map<
+  DiscoveryCategoryType,
+  Promise<{ businesses: BusinessType[] }>
+>();
+
+function placeListToBusinesses(list: Awaited<ReturnType<typeof getDiscoverBusinesses>>['businesses']): BusinessType[] {
+  return list.map((place) => ({
+    _id: place.placeId,
+    name: place.name,
+    imageSrc: place.photoName
+      ? `/api/place-photo?name=${encodeURIComponent(place.photoName)}`
+      : PLACEHOLDER_IMAGE,
+    imageSrcBig: place.photoName
+      ? `/api/place-photo?name=${encodeURIComponent(place.photoName)}`
+      : PLACEHOLDER_IMAGE,
+    rating: place.rating ?? 4.0,
+    userRatingsTotal: place.userRatingsTotal ?? 0,
+    openingHours: place.openingHours ?? '—',
+    address: place.address ?? '—',
+    phone: place.phone ?? '—',
+  }));
+}
 
 const Category = ({
   categoryName,
   categoryId,
-  businesses = [],
+  businesses: initialBusinesses = [],
+  discoveryCategoryType,
 }: {
   categoryName: string;
   categoryId: string;
   businesses: BusinessType[];
+  discoveryCategoryType?: DiscoveryCategoryType | null;
 }) => {
   const { t } = useTranslation();
+  const [businesses, setBusinesses] = useState<BusinessType[]>(initialBusinesses);
+  const [loading, setLoading] = useState(!!discoveryCategoryType);
   const [activeBusiness, setActiveBusiness] = useState<BusinessType | undefined>();
   const [dealsByBusiness, setDealsByBusiness] = useState<DealDocument[]>([]);
+
+  useEffect(() => {
+    if (!discoveryCategoryType) return;
+    setLoading(true);
+    let pending = discoverPendingByCategory.get(discoveryCategoryType);
+    if (!pending) {
+      pending = getDiscoverBusinesses({ categoryType: discoveryCategoryType })
+        .then(({ businesses: list }) => ({ businesses: placeListToBusinesses(list) }))
+        .catch(() => ({ businesses: [] as BusinessType[] }));
+      discoverPendingByCategory.set(discoveryCategoryType, pending);
+      pending.finally(() => discoverPendingByCategory.delete(discoveryCategoryType));
+    }
+    pending
+      .then(({ businesses: list }) => setBusinesses(list))
+      .finally(() => setLoading(false));
+  }, [discoveryCategoryType]);
+
   const businessesEnriched = useMemo(
     () =>
       businesses.map((b) => ({
@@ -74,7 +127,11 @@ const Category = ({
           </li>
         </ol>
       </nav>
-      {businesses.length === 0 ? (
+      {loading ? (
+        <p className="text-gray-500 dark:text-gray-400 py-8">
+          {t('category.loading', 'Loading…')}
+        </p>
+      ) : businesses.length === 0 ? (
         <p className="text-gray-500 dark:text-gray-400 py-8">
           {t('category.noBusinesses')}
         </p>
@@ -164,6 +221,8 @@ function getMockBusinesses(categoryName: string, count: number): BusinessType[] 
 export const getServerSideProps: GetServerSideProps = async ({
   params,
   locale = 'en',
+  req,
+  res,
 }) => {
   const id = (params?.id as string) ?? '';
   let categoryName = '';
@@ -214,12 +273,21 @@ export const getServerSideProps: GetServerSideProps = async ({
     }
   }
 
+  const discoveryCategoryType = getDiscoveryCategoryTypeFromName(categoryName);
+  if (discoveryCategoryType) {
+    businesses = [];
+  }
+
+  const session = await getServerSession(req, res, authOptions);
+
   return {
     props: {
       ...(await serverSideTranslations(locale)),
       categoryName,
       categoryId: id,
       businesses,
+      discoveryCategoryType: discoveryCategoryType ?? null,
+      session: session ?? null,
     },
   };
 };

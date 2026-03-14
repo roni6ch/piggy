@@ -1,7 +1,9 @@
 import Head from 'next/head';
+import { getServerSession } from 'next-auth';
 import { Category, Routes } from '@/common/types';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { GetServerSideProps } from 'next';
+import { authOptions } from '@/pages/api/auth/[...nextauth]';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'next-i18next';
@@ -100,7 +102,7 @@ function normalizeImageSrc(c: { name: string; imageSrc: string }): string {
 
 const CATEGORIES_TO_SHOW = 24;
 
-export const getServerSideProps: GetServerSideProps = async ({ locale = 'en' }) => {
+export const getServerSideProps: GetServerSideProps = async ({ locale = 'en', req, res }) => {
   const fromDb: Category[] = [];
   try {
     const result = await getCategories(100, 1);
@@ -135,11 +137,13 @@ export const getServerSideProps: GetServerSideProps = async ({ locale = 'en' }) 
     }
   }
   const categories = merged.slice(0, CATEGORIES_TO_SHOW);
+  const session = await getServerSession(req, res, authOptions);
 
   return {
     props: {
       ...(await serverSideTranslations(locale)),
       categories,
+      session: session ?? null,
     },
   };
 };

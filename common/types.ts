@@ -217,6 +217,34 @@ export type AiSearchResponse = {
   message?: string;
 };
 
+/** Category keys for Business Discovery (maps to Google Places includedType). */
+export type DiscoveryCategoryType = 'cinema' | 'gym' | 'cafe' | 'restaurant';
+
+/** Maps internal category to Google Places API (New) includedType. */
+export const DISCOVERY_CATEGORY_TO_GOOGLE_TYPE: Record<DiscoveryCategoryType, string> = {
+  cinema: 'movie_theater',
+  gym: 'gym',
+  cafe: 'cafe',
+  restaurant: 'restaurant',
+};
+
+/** Human-readable label for discovery category (e.g. for textQuery). */
+export const DISCOVERY_CATEGORY_LABELS: Record<DiscoveryCategoryType, string> = {
+  cinema: 'movie theater',
+  gym: 'gym',
+  cafe: 'cafe',
+  restaurant: 'restaurant',
+};
+
+/** Business from Places API (New) discovery – only fields we request (id, displayName, formattedAddress, types, location). */
+export type DiscoveryBusiness = {
+  id: string;
+  displayName: string;
+  formattedAddress?: string;
+  types: string[];
+  location?: { latitude: number; longitude: number };
+};
+
 /** Google Places API (New) search result – normalized for UI (closest businesses by name/query). */
 export type GooglePlace = {
   placeId: string;

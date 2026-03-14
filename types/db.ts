@@ -76,6 +76,8 @@ export interface BusinessDocument {
   address?: string;
   phone?: string;
   website?: string;
+  /** Google Place ID (e.g. ChIJ...) – links to Places API for discovery/perks badge. */
+  googlePlaceId?: string;
 }
 
 export interface DealDocument {

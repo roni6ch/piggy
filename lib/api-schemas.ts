@@ -34,6 +34,14 @@ export const placesSearchBodySchema = z.object({
   lng: z.number().optional(),
 });
 
+/** Discovery category and optional location for discover-businesses API. */
+const discoveryCategoryValues = ['cinema', 'gym', 'cafe', 'restaurant'] as const;
+export const discoverBusinessesBodySchema = z.object({
+  categoryType: z.enum(discoveryCategoryValues),
+  lat: z.number().optional(),
+  lng: z.number().optional(),
+});
+
 export const cardsQuerySchema = z.object({
   id: z.string().optional(),
   limit: z.coerce.number().int().min(1).max(100).optional().default(10),
@@ -46,4 +54,5 @@ export type RegisterBody = z.infer<typeof registerBodySchema>;
 export type ProfilePatchBody = z.infer<typeof profilePatchBodySchema>;
 export type AiSearchBody = z.infer<typeof aiSearchBodySchema>;
 export type PlacesSearchBody = z.infer<typeof placesSearchBodySchema>;
+export type DiscoverBusinessesBody = z.infer<typeof discoverBusinessesBodySchema>;
 export type CardsQuery = z.infer<typeof cardsQuerySchema>;

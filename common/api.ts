@@ -1,8 +1,9 @@
-import { Card, Category, Business, Network, Deals, RecentSearch, AiSearchResponse, GooglePlace } from '@/common/types';
+import { Card, Category, Business, Network, Deals, RecentSearch, AiSearchResponse, GooglePlace, DiscoveryCategoryType } from '@/common/types';
 
 export enum REQ_URLS {
     AI_SEARCH = `/api/ai-search`,
     PLACES_SEARCH = `/api/places-search`,
+    DISCOVER_BUSINESSES = `/api/discover-businesses`,
     SEARCH_PLACEHOLDER = `/api/search-placeholder`,
     CATEGORIES = `/api/categories`,
     BUSINESSES = `/api/businesses`,
@@ -397,4 +398,33 @@ export async function placesSearch(
     }
     const json = (await res.json()) as { places?: GooglePlace[] };
     return json.places ?? [];
+}
+
+/** Discovery: fetch businesses by category from Google Places API (New). Returns full place data and place IDs that have perks. */
+export async function getDiscoverBusinesses(options: {
+    categoryType: DiscoveryCategoryType;
+    lat?: number;
+    lng?: number;
+}): Promise<{ businesses: GooglePlace[]; placeIdsWithPerks: string[] }> {
+    const res = await fetch(`${BASE_URL}${REQ_URLS.DISCOVER_BUSINESSES}`, {
+        method: Network.POST,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            categoryType: options.categoryType,
+            lat: options.lat,
+            lng: options.lng,
+        }),
+    });
+    if (!res.ok) {
+        const err = await parseJsonOr<{ error?: string }>(res, {});
+        throw new Error(err.error || res.statusText);
+    }
+    const json = (await res.json()) as {
+        businesses?: GooglePlace[];
+        placeIdsWithPerks?: string[];
+    };
+    return {
+        businesses: json.businesses ?? [],
+        placeIdsWithPerks: json.placeIdsWithPerks ?? [],
+    };
 }

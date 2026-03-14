@@ -21,6 +21,7 @@ function toBusinessDocument(
     address: data.address as string | undefined,
     phone: data.phone as string | undefined,
     website: data.website as string | undefined,
+    googlePlaceId: data.googlePlaceId as string | undefined,
   };
 }
 
@@ -118,6 +119,7 @@ export const updateBusiness = async (
     if (business.address !== undefined) update.address = business.address;
     if (business.phone !== undefined) update.phone = business.phone;
     if (business.website !== undefined) update.website = business.website;
+    if (business.googlePlaceId !== undefined) update.googlePlaceId = business.googlePlaceId;
     await ref.update(update);
     return getBusiness(business._id);
   } catch (error) {
