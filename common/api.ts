@@ -272,8 +272,8 @@ export async function addTermToRecentSearch({
 /** Fetch a single search placeholder (e.g. "best deals at KSP", "coffee near me"). Can be backed by LLM later. */
 export async function getSearchPlaceholder(): Promise<string> {
   const res = await fetch(`${BASE_URL}${REQ_URLS.SEARCH_PLACEHOLDER}`);
-  const json = await parseJsonOr<{ placeholder?: string }>(res, { placeholder: 'Search stores, sales, coupons…' });
-  return json.placeholder ?? 'Search stores, sales, coupons…';
+  const json = await parseJsonOr<{ placeholder?: string }>(res, { placeholder: 'Try "Aroma" or "Café"…' });
+  return json.placeholder ?? 'Try "Aroma" or "Café"…';
 }
 
 /* USER COUPONS */
@@ -398,4 +398,3 @@ export async function placesSearch(
     const json = (await res.json()) as { places?: GooglePlace[] };
     return json.places ?? [];
 }
-

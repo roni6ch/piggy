@@ -368,7 +368,8 @@ export const addRecentSearch = async (
     ...(display?.phone != null && { phone: display.phone }),
     ...(display?.website != null && { website: display.website }),
   };
-  const next = [entry, ...searches.filter((s) => s.term !== businessId)].slice(0, RECENT_SEARCHES_MAX);
+  const filtered = searches.filter((s) => s.term !== businessId);
+  const next = [...filtered, entry].slice(-RECENT_SEARCHES_MAX);
   await userRef.update({ searches: next });
 };
 
@@ -421,7 +422,5 @@ export const getUserRecentSearches = async (
       return { term: business, createdAt: s.createdAt } as SearchDocument;
     })
   );
-  return withBusiness.sort(
-    (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
-  );
+  return withBusiness;
 };

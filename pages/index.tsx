@@ -141,10 +141,10 @@ export default function Index({
   const handleActiveBusiness = async (business: BusinessType) => {
     const enriched = allBusinesses.find((b) => b._id === business._id) ?? business;
     setActiveBusiness(enriched);
-    setUserData((prev) => ({
-      ...prev,
-      recentSearches: [enriched, ...(prev.recentSearches ?? []).filter((b) => b._id !== business._id)].slice(0, 10),
-    }));
+    setUserData((prev) => {
+      const rest = (prev.recentSearches ?? []).filter((b) => b._id !== business._id);
+      return { ...prev, recentSearches: [...rest, enriched].slice(-10) };
+    });
     if (session?.user?.email) {
       addTermToRecentSearch({
         userMail: session.user.email,

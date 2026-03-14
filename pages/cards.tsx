@@ -14,6 +14,26 @@ import Image from 'next/image';
 
 const MAX_CARDS = 20;
 
+function CardImageWithSkeleton({ src, alt, width, height, className }: { src: string; alt: string; width: number; height: number; className?: string }) {
+  const [loaded, setLoaded] = useState(false);
+  return (
+    <div className="relative inline-block" style={{ width, height }}>
+      {!loaded && (
+        <div className="absolute inset-0 rounded-lg bg-gray-200 dark:bg-gray-600 animate-pulse" aria-hidden />
+      )}
+      <Image
+        src={src}
+        width={width}
+        height={height}
+        alt={alt}
+        aria-hidden
+        className={className}
+        onLoad={() => setLoaded(true)}
+      />
+    </div>
+  );
+}
+
 const CLUBS: { value: Club; label: string }[] = [
   { value: Club.MAX, label: 'Max' },
   { value: Club.DISCOUNT, label: 'Discount' },
@@ -181,31 +201,30 @@ export default function Cards() {
                           type="button"
                           className={`${styles.logoButton} ${selectedClub === c.value ? styles.logoButtonSelected : ''}`}
                           onClick={() => setSelectedClub(c.value)}
-                          aria-label={c.label}
-                          title={c.label}
+                          aria-label={t(`cards.club.${c.value}`)}
+                          title={t(`cards.club.${c.value}`)}
                         >
-                          <Image
+                          <CardImageWithSkeleton
                             src={`/assets/cards-icons/${c.value}.svg`}
+                            alt={t(`cards.club.${c.value}`)}
                             width={56}
                             height={56}
-                            alt={c.label}
-                            aria-hidden
                           />
-                          <span className={styles.logoButtonTooltip}>{c.label}</span>
+                          <span className={styles.logoButtonTooltip}>{t(`cards.club.${c.value}`)}</span>
                         </button>
                       ))}
                     </div>
                   </div>
                   {selectedClub && (
                     <div className={styles.chosenUnderStep} aria-hidden>
-                      <Image
+                      <CardImageWithSkeleton
                         src={`/assets/cards-icons/${selectedClub}.svg`}
+                        alt={t(`cards.club.${selectedClub}`)}
                         width={28}
                         height={28}
-                        alt={CLUBS.find((c) => c.value === selectedClub)?.label ?? selectedClub}
                       />
                       <span className={styles.chosenLabel}>
-                        {CLUBS.find((c) => c.value === selectedClub)?.label ?? selectedClub}
+                        {t(`cards.club.${selectedClub}`)}
                       </span>
                     </div>
                   )}
@@ -222,8 +241,8 @@ export default function Cards() {
                           type="button"
                           className={`${styles.logoButton} ${selectedProvider === p.value ? styles.logoButtonSelected : ''}`}
                           onClick={() => setSelectedProvider(p.value)}
-                          aria-label={p.label}
-                          title={p.label}
+                          aria-label={t(`cards.provider.${p.value.toLowerCase()}`)}
+                          title={t(`cards.provider.${p.value.toLowerCase()}`)}
                         >
                           <PaymentNetworkIcon
                             provider={p.value}
@@ -231,7 +250,7 @@ export default function Cards() {
                             height={56}
                             ariaHidden
                           />
-                          <span className={styles.logoButtonTooltip}>{p.label}</span>
+                          <span className={styles.logoButtonTooltip}>{t(`cards.provider.${p.value.toLowerCase()}`)}</span>
                         </button>
                       ))}
                     </div>
@@ -239,14 +258,14 @@ export default function Cards() {
                   <div className={styles.chosenRow}>
                     {selectedClub && (
                       <div className={styles.chosenUnderStep} aria-hidden>
-                        <Image
+                        <CardImageWithSkeleton
                           src={`/assets/cards-icons/${selectedClub}.svg`}
+                          alt={t(`cards.club.${selectedClub}`)}
                           width={28}
                           height={28}
-                          alt={CLUBS.find((c) => c.value === selectedClub)?.label ?? selectedClub}
                         />
                         <span className={styles.chosenLabel}>
-                          {CLUBS.find((c) => c.value === selectedClub)?.label ?? selectedClub}
+                          {t(`cards.club.${selectedClub}`)}
                         </span>
                       </div>
                     )}
@@ -259,7 +278,7 @@ export default function Cards() {
                           ariaHidden
                         />
                         <span className={styles.chosenLabel}>
-                          {PROVIDERS.find((p) => p.value === selectedProvider)?.label ?? selectedProvider}
+                          {t(`cards.provider.${selectedProvider.toLowerCase()}`)}
                         </span>
                       </div>
                     )}

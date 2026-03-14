@@ -1,5 +1,5 @@
 import { useTranslation } from 'next-i18next';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Business as BusinessType,
   Category as CategoryType,
@@ -57,8 +57,14 @@ function ItemCard<T extends BusinessType | CategoryType>({
   noEnterAnimation?: boolean;
 }) {
   const [imgError, setImgError] = useState(false);
+  const [imageLoaded, setImageLoaded] = useState(false);
+  useEffect(() => {
+    setImageLoaded(false);
+    setImgError(false);
+  }, [item._id, item.imageSrc]);
   const usePlaceholder = !item.imageSrc || imgError;
   const isProxyOrExternal = item.imageSrc.startsWith('/api/') || item.imageSrc.startsWith('http') || item.imageSrc.startsWith('data:');
+  const showImage = !usePlaceholder;
 
   return (
     <button
@@ -68,6 +74,9 @@ function ItemCard<T extends BusinessType | CategoryType>({
       style={noEnterAnimation ? undefined : { animationDelay: `${animationDelay}s` }}
     >
       <div className="relative w-full aspect-[4/3] bg-gray-100 dark:bg-gray-700 overflow-hidden group">
+        {showImage && !imageLoaded && (
+          <div className="absolute inset-0 bg-gray-200 dark:bg-gray-600 animate-pulse" aria-hidden />
+        )}
         {usePlaceholder ? (
           <img
             src={PLACEHOLDER_IMAGE}
@@ -83,6 +92,7 @@ function ItemCard<T extends BusinessType | CategoryType>({
             alt={item.name}
             className="absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-105"
             loading="lazy"
+            onLoad={() => setImageLoaded(true)}
             onError={() => setImgError(true)}
           />
         ) : (
@@ -93,6 +103,7 @@ function ItemCard<T extends BusinessType | CategoryType>({
             className="object-cover transition-transform duration-300 ease-out group-hover:scale-105"
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
             loading="lazy"
+            onLoad={() => setImageLoaded(true)}
             onError={() => setImgError(true)}
           />
         )}
@@ -101,7 +112,7 @@ function ItemCard<T extends BusinessType | CategoryType>({
         <span className="font-semibold text-gray-800 dark:text-gray-100 text-sm sm:text-base">
           {label}
         </span>
-        {(() => {
+        {!('businessIds' in item) && (() => {
           const biz = item as Partial<Pick<BusinessType, 'rating' | 'userRatingsTotal' | 'openingHours' | 'address'>>;
           return (
             <>
