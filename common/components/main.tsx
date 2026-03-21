@@ -94,10 +94,15 @@ const Main = ({ children = <></> }: { children: React.ReactNode }) => {
     });
   }, [status, router]);
 
+  /** Redirect must run in useEffect — not during render — so SSR/static generation never calls router.replace (no router instance). */
+  useEffect(() => {
+    if (status !== 'unauthenticated') return;
+    void router.replace(Routes.LOGIN);
+  }, [status, router]);
+
   const OuterBoxHeading = () => <></>;
 
   if (status === 'unauthenticated') {
-    router.replace(Routes.LOGIN);
     return null;
   }
 
