@@ -1,0 +1,124 @@
+{
+  "projectId": "14173284532756628243",
+  "projectTitle": "Auth Page (Mobile)",
+  "fetchedAt": "2026-04-18T18:33:02.844Z",
+  "screens": [
+    {
+      "id": "8299c8d33db5460dab03ab810a1ec613",
+      "title": "Home Dashboard Empty State - Expanded (Desktop)",
+      "slug": "01-home-dashboard-empty-state-expanded-desktop",
+      "html": "screen.html",
+      "screenshot": "screenshot.png",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "asset-stub-assets-a087ae2c1f024a21a6512f8e3e60985d-1774135208802",
+      "title": "Design System",
+      "slug": "02-design-system",
+      "html": null,
+      "screenshot": null,
+      "ok": false,
+      "error": "Skipped: design-system stub — export design systems via Stitch UI or API separately"
+    },
+    {
+      "id": "a3823bb2db4a432688e079a41327203f",
+      "title": "Home Dashboard - Full Width (Desktop)",
+      "slug": "03-home-dashboard-full-width-desktop",
+      "html": "screen.html",
+      "screenshot": "screenshot.png",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "eabc453f90f646fe9bd20eb997a55322",
+      "title": "Home Dashboard - Assets V2 (Mobile)",
+      "slug": "04-home-dashboard-assets-v2-mobile",
+      "html": "screen.html",
+      "screenshot": "screenshot.png",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "f646a5ea072844fe8587a964cee03952",
+      "title": "Home Dashboard Empty State (Mobile)",
+      "slug": "05-home-dashboard-empty-state-mobile",
+      "html": "screen.html",
+      "screenshot": "screenshot.png",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "53497775460f4ac2b279abc360fc7c32",
+      "title": "Search Results - Empty State (Desktop)",
+      "slug": "06-search-results-empty-state-desktop",
+      "html": "screen.html",
+      "screenshot": "screenshot.png",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "c129ea02a208479a9d7128fb89533b59",
+      "title": "Add & Manage Assets (Desktop)",
+      "slug": "07-add-manage-assets-desktop",
+      "html": "screen.html",
+      "screenshot": "screenshot.png",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "34640daac5d14350961eeb71a387067e",
+      "title": "Add Assets - Simplified (Mobile)",
+      "slug": "08-add-assets-simplified-mobile",
+      "html": "screen.html",
+      "screenshot": "screenshot.png",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "da6b61c056d746b587d51799c9d73f44",
+      "title": "Profile & Settings (Mobile)",
+      "slug": "09-profile-settings-mobile",
+      "html": "screen.html",
+      "screenshot": "screenshot.png",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "fb2ec71cd3c64e86930d281764cae705",
+      "title": "Profile & Settings (Desktop)",
+      "slug": "10-profile-settings-desktop",
+      "html": "screen.html",
+      "screenshot": "screenshot.png",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "fc536aba2cec437abf80a8a8a6bd8c67",
+      "title": "Search Results - Empty State (Mobile)",
+      "slug": "11-search-results-empty-state-mobile",
+      "html": "screen.html",
+      "screenshot": "screenshot.png",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "49e58914a4514d55a22f9bd323f0d90c",
+      "title": "Search Results - Seller Focused (Desktop)",
+      "slug": "12-search-results-seller-focused-desktop",
+      "html": "screen.html",
+      "screenshot": "screenshot.png",
+      "ok": true,
+      "error": null
+    },
+    {
+      "id": "16b64d8d23b4437da44f1a90209aa5f2",
+      "title": "Search Results - Beautiful Dark Mode (Mobile)",
+      "slug": "13-search-results-beautiful-dark-mode-mobile",
+      "html": "screen.html",
+      "screenshot": "screenshot.png",
+      "ok": true,
+      "error": null
+    }
+  ]
+}

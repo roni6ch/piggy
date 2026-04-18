@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profile &amp; Settings - Piggy</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800;900&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-error": "#490013",
+                        "primary-fixed": "#ff709f",
+                        "on-tertiary": "#005269",
+                        "surface-dim": "#0c0e11",
+                        "on-surface": "#e8e8ec",
+                        "on-tertiary-fixed-variant": "#005269",
+                        "on-error-container": "#ffb2b9",
+                        "background": "#0c0e11",
+                        "on-tertiary-container": "#00485d",
+                        "surface": "#0c0e11",
+                        "on-secondary-fixed": "#004730",
+                        "surface-tint": "#ff89ad",
+                        "on-surface-variant": "#aaabaf",
+                        "tertiary-dim": "#60c8f0",
+                        "error-dim": "#d73357",
+                        "outline": "#747579",
+                        "secondary-container": "#006c4b",
+                        "on-primary": "#62002e",
+                        "tertiary-fixed": "#70d6ff",
+                        "inverse-primary": "#ad2b5e",
+                        "tertiary-container": "#70d6ff",
+                        "on-background": "#e8e8ec",
+                        "surface-variant": "#23262a",
+                        "inverse-on-surface": "#535559",
+                        "on-primary-fixed-variant": "#5d002b",
+                        "tertiary": "#9de1ff",
+                        "surface-bright": "#292c31",
+                        "surface-container": "#171a1d",
+                        "on-primary-fixed": "#000000",
+                        "secondary-fixed": "#59faba",
+                        "primary-dim": "#ff6b9d",
+                        "on-secondary-container": "#e0ffec",
+                        "error": "#ff6e84",
+                        "inverse-surface": "#f9f9fd",
+                        "tertiary-fixed-dim": "#60c8f0",
+                        "primary-fixed-dim": "#f16092",
+                        "on-tertiary-fixed": "#003342",
+                        "surface-container-high": "#1d2024",
+                        "on-secondary": "#005c3f",
+                        "error-container": "#a70138",
+                        "surface-container-highest": "#23262a",
+                        "outline-variant": "#46484b",
+                        "secondary-dim": "#47ecad",
+                        "secondary": "#59faba",
+                        "on-primary-container": "#4c0022",
+                        "surface-container-lowest": "#000000",
+                        "primary": "#ff89ad",
+                        "on-secondary-fixed-variant": "#006747",
+                        "primary-container": "#ff709f",
+                        "secondary-fixed-dim": "#47ecad",
+                        "surface-container-low": "#111317"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 24px); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body antialiased min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 bg-[#0c0e11]/80 backdrop-blur-lg tonal-shift bg-[#111317] shadow-[0_20px_40px_rgba(255,107,157,0.08)] hidden md:flex">
+<button class="text-on-surface hover:scale-95 transition-transform active:scale-96 transition-all duration-200">
+<span class="material-symbols-outlined" data-icon="menu">menu</span>
+</button>
+<h1 class="font-headline tracking-tight text-2xl font-black text-[#FF6B9D] tracking-tighter">Piggy</h1>
+<button class="text-[#FF6B9D] font-headline font-bold hover:scale-95 transition-transform active:scale-96 transition-all duration-200">
+            EN
+        </button>
+</header>
+<!-- Main Content -->
+<main class="px-6 pt-10 md:pt-28 pb-24 max-w-lg mx-auto space-y-8">
+<!-- Page Title -->
+<div class="space-y-2 pt-6 md:pt-0">
+<h2 class="font-headline text-3xl font-bold tracking-tight text-on-surface">Profile &amp; Settings</h2>
+<p class="text-on-surface-variant text-sm font-label">Manage your Piggy experience</p>
+</div>
+<!-- Profile Info Card -->
+<section class="bg-surface-container-low rounded-lg p-6 space-y-6 relative overflow-hidden group">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-lg"></div>
+<div class="flex items-center space-x-6 relative z-10">
+<div class="w-20 h-20 rounded-full bg-surface-container-highest p-1 flex-shrink-0 relative">
+<img alt="Profile avatar" class="w-full h-full rounded-full object-cover" data-alt="close up portrait of a young woman with natural makeup looking directly at camera with soft natural lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_jesjp33fjmT1CvRT58HrdASkIs53wEGnZmBaJUOuieJeSMlHscbPGj_xwEaEVKUquISlArBtLuAVxeTgAHU4g5iiE_6RtyP3m84mM365eia4rxnRH-JyhcLR5_K_JEeEUkzl9nvw9SzqCLCS2u5GM3SiFpsYpjHvCB-yGbG6SRPDT1WENTIww6kM8ZkoSjlgh1cJfphOH3ne-agQVeU1-40U-NQwLVfCMrX5kFArGaP1tYgEXb-JD0y7uizVQy-0ydu9fUtafjWt"/>
+<button class="absolute bottom-0 right-0 bg-primary w-8 h-8 rounded-full flex items-center justify-center text-on-primary shadow-[0_4px_12px_rgba(255,107,157,0.4)] border-2 border-surface-container-low hover:scale-95 transition-transform">
+<span class="material-symbols-outlined text-[16px]" data-icon="edit">edit</span>
+</button>
+</div>
+<div>
+<h3 class="font-headline text-xl font-bold text-on-surface">Alex Morgan</h3>
+<p class="text-on-surface-variant text-sm font-label mt-1">@alex_piggy</p>
+<div class="mt-3 inline-flex items-center space-x-2 bg-surface-variant rounded-full px-3 py-1 border border-outline-variant/15">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="text-xs font-label text-on-surface-variant uppercase tracking-wider">Premium Member</span>
+</div>
+</div>
+</div>
+<div class="space-y-4 relative z-10">
+<div class="flex flex-col space-y-1">
+<label class="text-xs font-label text-on-surface-variant uppercase tracking-wider">Email</label>
+<div class="flex justify-between items-center bg-surface p-4 rounded-xl border border-outline-variant/15">
+<span class="text-sm font-body text-on-surface">alex.morgan@example.com</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]" data-icon="verified">verified</span>
+</div>
+</div>
+<div class="flex flex-col space-y-1">
+<label class="text-xs font-label text-on-surface-variant uppercase tracking-wider">Phone</label>
+<div class="flex justify-between items-center bg-surface p-4 rounded-xl border border-outline-variant/15">
+<span class="text-sm font-body text-on-surface">+1 (555) 123-4567</span>
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]" data-icon="edit_square">edit_square</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Settings Groups -->
+<div class="space-y-6">
+<!-- Security & Privacy -->
+<section class="space-y-3">
+<h4 class="font-headline text-sm font-bold text-on-surface-variant uppercase tracking-wider pl-2">Security &amp; Privacy</h4>
+<div class="bg-surface-container rounded-lg overflow-hidden flex flex-col">
+<button class="w-full flex items-center justify-between p-5 hover:bg-surface-container-high transition-colors text-left group">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-primary border border-outline-variant/15 group-hover:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="lock">lock</span>
+</div>
+<div>
+<span class="block font-headline text-base font-bold text-on-surface">Change Password</span>
+<span class="block text-xs font-body text-on-surface-variant mt-0.5">Updated 3 months ago</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-5 hover:bg-surface-container-high transition-colors text-left group border-t border-outline-variant/15">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-secondary border border-outline-variant/15 group-hover:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="fingerprint">fingerprint</span>
+</div>
+<div>
+<span class="block font-headline text-base font-bold text-on-surface">Biometric Login</span>
+<span class="block text-xs font-body text-on-surface-variant mt-0.5">Face ID enabled</span>
+</div>
+</div>
+<div class="w-12 h-6 bg-secondary-container rounded-full relative cursor-pointer">
+<div class="w-5 h-5 bg-secondary rounded-full absolute right-0.5 top-0.5 shadow-sm"></div>
+</div>
+</button>
+<button class="w-full flex items-center justify-between p-5 hover:bg-surface-container-high transition-colors text-left group border-t border-outline-variant/15">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-tertiary border border-outline-variant/15 group-hover:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="devices">devices</span>
+</div>
+<div>
+<span class="block font-headline text-base font-bold text-on-surface">Active Sessions</span>
+<span class="block text-xs font-body text-on-surface-variant mt-0.5">2 devices connected</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</section>
+<!-- Preferences -->
+<section class="space-y-3">
+<h4 class="font-headline text-sm font-bold text-on-surface-variant uppercase tracking-wider pl-2">Preferences</h4>
+<div class="bg-surface-container rounded-lg overflow-hidden flex flex-col">
+<button class="w-full flex items-center justify-between p-5 hover:bg-surface-container-high transition-colors text-left group">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-primary-dim border border-outline-variant/15 group-hover:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</div>
+<div>
+<span class="block font-headline text-base font-bold text-on-surface">Notifications</span>
+<span class="block text-xs font-body text-on-surface-variant mt-0.5">Push, Email, SMS</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-5 hover:bg-surface-container-high transition-colors text-left group border-t border-outline-variant/15">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-on-surface border border-outline-variant/15 group-hover:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="language">language</span>
+</div>
+<div>
+<span class="block font-headline text-base font-bold text-on-surface">Language</span>
+<span class="block text-xs font-body text-on-surface-variant mt-0.5">English (US)</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</button>
+<button class="w-full flex items-center justify-between p-5 hover:bg-surface-container-high transition-colors text-left group border-t border-outline-variant/15">
+<div class="flex items-center space-x-4">
+<div class="w-10 h-10 rounded-full bg-surface flex items-center justify-center text-on-surface border border-outline-variant/15 group-hover:scale-95 transition-transform">
+<span class="material-symbols-outlined" data-icon="dark_mode">dark_mode</span>
+</div>
+<div>
+<span class="block font-headline text-base font-bold text-on-surface">Appearance</span>
+<span class="block text-xs font-body text-on-surface-variant mt-0.5">System Default</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</section>
+</div>
+<!-- Logout Area -->
+<section class="pt-8 pb-4">
+<button class="w-full py-4 rounded-full border border-error-dim/30 bg-surface text-error font-headline font-bold text-base shadow-[0_4px_20px_rgba(255,110,132,0.05)] hover:bg-error-dim/10 active:scale-96 transition-all duration-200 flex items-center justify-center space-x-2">
+<span class="material-symbols-outlined" data-icon="logout">logout</span>
+<span>Log Out</span>
+</button>
+<p class="text-center text-xs font-label text-on-surface-variant mt-6">Piggy App Version 4.2.1 (Build 890)</p>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-6 left-1/2 -translate-x-1/2 w-[92%] rounded-full bg-[#171a1d]/40 backdrop-blur-2xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] z-50 flex justify-around items-center px-4 pb-safe md:hidden border border-outline-variant/10">
+<a class="flex flex-col items-center justify-center text-slate-400 p-3 hover:text-[#FF6B9D] active:scale-90 transition-all duration-300 ease-out group" href="#">
+<span class="material-symbols-outlined group-hover:-translate-y-1 transition-transform duration-300" data-icon="home">home</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest font-bold mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 p-3 hover:text-[#FF6B9D] active:scale-90 transition-all duration-300 ease-out group" href="#">
+<span class="material-symbols-outlined group-hover:-translate-y-1 transition-transform duration-300" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest font-bold mt-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300">Wallet</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-400 p-3 hover:text-[#FF6B9D] active:scale-90 transition-all duration-300 ease-out group" href="#">
+<div class="bg-surface-variant p-2 rounded-full border border-outline-variant/15 group-hover:border-primary/50 transition-colors">
+<span class="material-symbols-outlined" data-icon="qr_code_scanner">qr_code_scanner</span>
+</div>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest font-bold mt-1 sr-only">Scanner</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-gradient-to-tr from-[#ff89ad] to-[#ff709f] text-white rounded-full p-3 mb-2 shadow-[0_0_20px_rgba(255,107,157,0.4)] active:scale-90 transition-all duration-300 ease-out" href="#">
+<span class="material-symbols-outlined" data-icon="person" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest font-bold mt-1">Profile</span>
+</a>
+</nav>
+</body></html>

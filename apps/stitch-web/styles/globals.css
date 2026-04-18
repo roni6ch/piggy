@@ -1,0 +1,11 @@
+@import '../lib/stitch-tokens.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  @apply min-h-screen antialiased;
+  background: var(--stitch-surface);
+  color: var(--stitch-on-surface);
+}

@@ -55,7 +55,11 @@ function MyApp({
   if (Component.getCleanLayout) {
     return (
       <div className={poppins.className}>
-        <Component {...pageProps} />
+        <ThemeProvider enableSystem={false} attribute="class" defaultTheme="dark" storageKey="piggy-theme">
+          <SessionProvider session={session} refetchOnWindowFocus={false} refetchWhenOffline={false} refetchInterval={0}>
+            <Component {...pageProps} />
+          </SessionProvider>
+        </ThemeProvider>
       </div>
     );
   }

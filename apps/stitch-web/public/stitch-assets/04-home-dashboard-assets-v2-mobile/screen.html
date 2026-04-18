@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-bright": "#292c31",
+              "surface-container-low": "#111317",
+              "primary-container": "#ff709f",
+              "on-tertiary-fixed": "#003342",
+              "tertiary-fixed-dim": "#60c8f0",
+              "primary-dim": "#ff6b9d",
+              "surface": "#0c0e11",
+              "on-error": "#490013",
+              "tertiary-fixed": "#70d6ff",
+              "primary": "#ff89ad",
+              "secondary-container": "#006c4b",
+              "on-secondary": "#005c3f",
+              "error-container": "#a70138",
+              "on-primary-container": "#4c0022",
+              "on-tertiary-container": "#00485d",
+              "secondary-fixed-dim": "#47ecad",
+              "on-surface": "#e8e8ec",
+              "on-primary": "#62002e",
+              "error-dim": "#d73357",
+              "inverse-primary": "#ad2b5e",
+              "inverse-on-surface": "#535559",
+              "on-secondary-container": "#e0ffec",
+              "on-primary-fixed": "#000000",
+              "on-tertiary": "#005269",
+              "on-primary-fixed-variant": "#5d002b",
+              "tertiary-container": "#70d6ff",
+              "secondary-dim": "#47ecad",
+              "on-secondary-fixed-variant": "#006747",
+              "on-surface-variant": "#aaabaf",
+              "tertiary-dim": "#60c8f0",
+              "surface-variant": "#23262a",
+              "outline-variant": "#46484b",
+              "error": "#ff6e84",
+              "on-background": "#e8e8ec",
+              "on-error-container": "#ffb2b9",
+              "surface-container-highest": "#23262a",
+              "surface-container-high": "#1d2024",
+              "secondary-fixed": "#59faba",
+              "outline": "#747579",
+              "surface-container-lowest": "#000000",
+              "primary-fixed-dim": "#f16092",
+              "on-tertiary-fixed-variant": "#005269",
+              "secondary": "#59faba"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      .glass-card {
+        background: rgba(35, 38, 42, 0.4);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+      }
+      body {
+        background-color: #0c0e11;
+        color: #e8e8ec;
+      }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="font-body selection:bg-primary/30">
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0c0e11]/80 backdrop-blur-xl bg-gradient-to-b from-[#111317] to-transparent shadow-[0_20px_40px_rgba(255,107,157,0.08)]">
+<div class="flex justify-between items-center px-6 py-4 w-full max-w-screen-xl mx-auto">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#ff89ad]" data-icon="translate">translate</span>
+</div>
+<div class="text-[#ff89ad] font-['Plus_Jakarta_Sans'] font-black italic tracking-tighter text-2xl active:scale-95 transition-transform duration-200 cursor-pointer">
+                Piggy
+            </div>
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-slate-400 hover:opacity-80 transition-opacity" data-icon="dark_mode">dark_mode</span>
+</div>
+</div>
+</nav>
+<main class="pt-24 pb-32 px-6 max-w-screen-md mx-auto min-h-screen">
+<!-- AI Search Bar -->
+<section class="mb-12">
+<div class="relative group">
+<div class="absolute -inset-1 bg-gradient-to-r from-primary to-primary-container rounded-lg blur opacity-10 group-focus-within:opacity-25 transition duration-500"></div>
+<div class="relative flex items-center bg-surface-container rounded-lg p-2 shadow-xl">
+<span class="material-symbols-outlined ml-3 text-outline" data-icon="search">search</span>
+<input class="w-full bg-transparent border-none focus:ring-0 text-on-surface placeholder:text-outline/60 px-4 font-medium text-sm" placeholder="What are the deals at Zara right now?" type="text"/>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary-fixed px-6 py-2.5 rounded-lg font-headline font-bold text-sm active:scale-95 transition-all shadow-[0_4px_15px_rgba(255,137,173,0.3)]">
+                        Ask
+                    </button>
+</div>
+</div>
+</section>
+<!-- Your Piggy Bank Section -->
+<section class="mb-12">
+<h2 class="font-headline font-extrabold text-2xl mb-6 tracking-tight flex items-center gap-2">
+                Your Piggy Bank
+                <span class="h-1.5 w-1.5 rounded-full bg-primary animate-pulse"></span>
+</h2>
+<div class="flex gap-4 overflow-x-auto pb-4 no-scrollbar -mx-2 px-2">
+<!-- Card 1 -->
+<div class="glass-card min-w-[140px] aspect-square rounded-lg p-5 flex flex-col justify-between border border-white/5 shadow-lg group hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="account_balance_wallet">account_balance_wallet</span>
+<div>
+<p class="text-[10px] uppercase tracking-widest font-semibold text-outline-variant mb-1">Store Credit</p>
+<p class="font-headline font-bold text-xl text-on-surface">$420</p>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="glass-card min-w-[140px] aspect-square rounded-lg p-5 flex flex-col justify-between border border-white/5 shadow-lg group hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-tertiary text-3xl" data-icon="card_giftcard">card_giftcard</span>
+<div>
+<p class="text-[10px] uppercase tracking-widest font-semibold text-outline-variant mb-1">Gift Cards</p>
+<p class="font-headline font-bold text-xl text-on-surface">12 items</p>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="glass-card min-w-[140px] aspect-square rounded-lg p-5 flex flex-col justify-between border border-white/5 shadow-lg group hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-secondary text-3xl" data-icon="confirmation_number">confirmation_number</span>
+<div>
+<p class="text-[10px] uppercase tracking-widest font-semibold text-outline-variant mb-1">Vouchers</p>
+<p class="font-headline font-bold text-xl text-on-surface">3 active</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Destinations Section -->
+<section class="mb-12">
+<div class="flex justify-between items-end mb-6">
+<h2 class="font-headline font-extrabold text-2xl tracking-tight">Recent Destinations</h2>
+<span class="text-xs font-bold text-primary uppercase tracking-widest mb-1">View All</span>
+</div>
+<div class="space-y-4">
+<!-- Mini Card 1 -->
+<div class="bg-surface-container-low hover:bg-surface-container transition-colors p-4 rounded-lg flex items-center gap-4">
+<div class="h-14 w-14 rounded-full overflow-hidden flex-shrink-0 border-2 border-surface-variant">
+<img alt="Apple Store Fifth Ave" class="h-full w-full object-cover" data-alt="Close up of a modern sleek retail storefront at night" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCnZJcgDr7lj2ZedYPFoGWmKsdPRXxtgkyuHfjSoBctbOoXrogJWFMamNHTlxmrUjXBIhF2yrCeT5C_Ly-4a4Bi_FLXB3KNSt7PAnG9TZ8fP7hqr-Jt0RfcucJpoyrMHEExNMTgdRyMNDj6tnJ_n52vVSPyosXBUSDI9Er8WxZgjeslvtV5akVMNq-tZJTaGjQp6EQGMPcm7UWtlP5erZ420R18i47P8AyeIoxYe9Q1gbVi50mItXo9_axpgn_iozV_NMxFVMfyLZun"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<h3 class="font-headline font-bold text-sm text-on-surface">Apple Store Fifth Ave</h3>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary-fixed" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold text-on-surface-variant">4.9</span>
+</div>
+</div>
+<div class="flex items-center gap-3 mt-1.5">
+<span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary-fixed border border-secondary-container/30 uppercase tracking-tighter">Open Now</span>
+<span class="text-[11px] text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="near_me">near_me</span>
+                                0.4 miles away
+                            </span>
+</div>
+</div>
+</div>
+<!-- Mini Card 2 -->
+<div class="bg-surface-container-low hover:bg-surface-container transition-colors p-4 rounded-lg flex items-center gap-4">
+<div class="h-14 w-14 rounded-full overflow-hidden flex-shrink-0 border-2 border-surface-variant">
+<img alt="Zara Soho" class="h-full w-full object-cover" data-alt="Blurry street view of a high end fashion store window" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAg7U2T1kP_qu7K5MAJT3rBYtcgHlWo3W4cvciBkWXUTeRyHxwr392tXlMkyhpYvQ5CueHWeu60xnrxl-YOn782tneawETySpTGR0alEPr3imAJMM_LXNe6RHaa-Nb36jILHirunGBuh1V6Jx69xG3ld_06xUcK_-FwB9kjxPGrVcn3gYJZXPQstBjm_WCRLS4V4IhARgXwfq5OyREr0aFlisDzduOJFyyUVSG_PB-vuMsP8SCn7r0CGhAk9uO400LfI0I7KzE241AE"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<h3 class="font-headline font-bold text-sm text-on-surface">Zara Soho</h3>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary-fixed" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold text-on-surface-variant">4.2</span>
+</div>
+</div>
+<div class="flex items-center gap-3 mt-1.5">
+<span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-error-container/20 text-error-dim border border-error-container/30 uppercase tracking-tighter">Closed</span>
+<span class="text-[11px] text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="near_me">near_me</span>
+                                1.2 miles away
+                            </span>
+</div>
+</div>
+</div>
+<!-- Mini Card 3 -->
+<div class="bg-surface-container-low hover:bg-surface-container transition-colors p-4 rounded-lg flex items-center gap-4">
+<div class="h-14 w-14 rounded-full overflow-hidden flex-shrink-0 border-2 border-surface-variant">
+<img alt="Whole Foods" class="h-full w-full object-cover" data-alt="Clean minimal grocery store produce display" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCtBpCzwCqWdgMEYaV2PP2tQazgTGmMADs5JM-AvFGlYFEFxG47iVTyt4npIMToezhewOZNb5ZqptjoGixgxRqkvw6lIfeK_iilp6u6RvZ_DZR5kVeoxy1BOTLJBgxnVazQPn_k2k3Uz3E-FbAMQ2A8wE1hs1Ged6cEo6MGBc0EYGKvtfzZ13agZ4bcfcA3Ih_oa4qoYG6OVwtEW6nZC1oZeUPXtK-tmAwJ9kp2DtIvX44rJxtFmJgb2t9ATLKwRUs0fONn9ZfsC5oh"/>
+</div>
+<div class="flex-grow">
+<div class="flex justify-between items-start">
+<h3 class="font-headline font-bold text-sm text-on-surface">Whole Foods Market</h3>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-tertiary-fixed" data-icon="star" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="text-xs font-bold text-on-surface-variant">4.7</span>
+</div>
+</div>
+<div class="flex items-center gap-3 mt-1.5">
+<span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-secondary-container/20 text-secondary-fixed border border-secondary-container/30 uppercase tracking-tighter">Open Now</span>
+<span class="text-[11px] text-outline flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="near_me">near_me</span>
+                                2.5 miles away
+                            </span>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- FAB -->
+<button class="fixed bottom-32 right-6 h-16 w-16 rounded-full bg-gradient-to-br from-primary to-primary-container text-on-primary-fixed shadow-[0_10px_30px_rgba(255,107,157,0.4)] flex items-center justify-center active:scale-90 transition-all duration-150 z-40">
+<span class="material-symbols-outlined text-3xl font-bold" data-icon="add">add</span>
+</button>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-6 pb-8 pt-4 bg-[#171a1d]/40 backdrop-blur-md rounded-t-[2rem] border-t-[0.5px] border-white/10 shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+<!-- Home (Active) -->
+<a class="flex flex-col items-center justify-center text-[#ff89ad] bg-[#ff89ad]/10 rounded-full px-4 py-1 active:scale-90 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest font-semibold mt-0.5">Home</span>
+</a>
+<!-- Wallet -->
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#ff709f] active:scale-90 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest font-semibold mt-0.5">Wallet</span>
+</a>
+<!-- Scanner -->
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#ff709f] active:scale-90 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="qr_code_scanner">qr_code_scanner</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest font-semibold mt-0.5">Scanner</span>
+</a>
+<!-- Profile -->
+<a class="flex flex-col items-center justify-center text-slate-500 hover:text-[#ff709f] active:scale-90 transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-['Inter'] text-[10px] uppercase tracking-widest font-semibold mt-0.5">Profile</span>
+</a>
+</nav>
+</body></html>

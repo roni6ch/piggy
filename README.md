@@ -1,3 +1,7 @@
+dev@test.com / test123
+npm run dev
+https://console.firebase.google.com/project/fid2026/firestore/databases/-default-/data/~2Fusers~2Fdev@test.com~2Fvouchers~2FooOnH3K6cVYFdDNF5p9U
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

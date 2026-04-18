@@ -90,6 +90,26 @@ export interface DealDocument {
   businessId: string | Business;
 }
 
+/** Full voucher uploaded via the upload-voucher form. Stored in users/{email}/vouchers/{id}. */
+export interface UserVoucherDocument {
+  _id: string;
+  voucherType: 'coupon' | 'voucher' | 'credit' | 'gift_card';
+  title: string;
+  brandName: string;
+  serialNumber: string;
+  pinCode: string;
+  value: string;
+  currency: string;
+  expirationDate: string;
+  link: string;
+  notes: string;
+  imageUrl?: string;
+  imageData?: string;
+  sortOrder: number;
+  createdAt: Date;
+  updatedAt: Date;
+}
+
 /** User-uploaded coupon (manual or from receipt). Stored on user document as user.coupons[]. */
 export interface UserCouponDocument {
   _id: string;

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "outline-variant": "#46484b",
+              "on-tertiary-container": "#00485d",
+              "tertiary-fixed-dim": "#60c8f0",
+              "tertiary-fixed": "#70d6ff",
+              "on-primary-container": "#4c0022",
+              "on-secondary-fixed": "#004730",
+              "background": "#0c0e11",
+              "surface-tint": "#ff89ad",
+              "secondary-fixed-dim": "#47ecad",
+              "primary-dim": "#ff6b9d",
+              "surface-container-high": "#1d2024",
+              "surface-variant": "#23262a",
+              "error-container": "#a70138",
+              "on-background": "#e8e8ec",
+              "secondary-container": "#006c4b",
+              "secondary-dim": "#47ecad",
+              "primary-fixed-dim": "#f16092",
+              "on-tertiary-fixed": "#003342",
+              "surface": "#0c0e11",
+              "surface-container-lowest": "#000000",
+              "on-tertiary": "#005269",
+              "surface-dim": "#0c0e11",
+              "primary-container": "#ff709f",
+              "error": "#ff6e84",
+              "on-primary-fixed": "#000000",
+              "on-secondary-container": "#e0ffec",
+              "secondary": "#59faba",
+              "on-secondary": "#005c3f",
+              "on-primary": "#62002e",
+              "surface-container-highest": "#23262a",
+              "outline": "#747579",
+              "primary": "#ff89ad",
+              "tertiary-dim": "#60c8f0",
+              "surface-bright": "#292c31",
+              "on-tertiary-fixed-variant": "#005269",
+              "on-surface": "#e8e8ec",
+              "on-secondary-fixed-variant": "#006747",
+              "tertiary": "#9de1ff",
+              "on-error-container": "#ffb2b9",
+              "inverse-on-surface": "#535559",
+              "surface-container": "#171a1d",
+              "error-dim": "#d73357",
+              "tertiary-container": "#70d6ff"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .glass-card { background: rgba(35, 38, 42, 0.4); backdrop-filter: blur(20px); }
+        .piggy-glow { box-shadow: 0 20px 40px rgba(255, 137, 173, 0.08); }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen overflow-x-hidden">
+<!-- Top Navigation -->
+<nav class="bg-[#0c0e11]/40 backdrop-blur-xl sticky top-0 z-50 border-b border-outline-variant/10">
+<div class="flex justify-between items-center w-full px-6 py-4 max-w-screen-2xl mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-black text-[#ff89ad] tracking-tighter font-['Plus_Jakarta_Sans']">Piggy</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-[#ff89ad] font-bold border-b-2 border-[#ff89ad] pb-1 font-['Plus_Jakarta_Sans'] tracking-tight" href="#">Dashboard</a>
+<a class="text-slate-400 hover:text-slate-100 transition-colors font-['Plus_Jakarta_Sans'] font-bold tracking-tight" href="#">Assets</a>
+<a class="text-slate-400 hover:text-slate-100 transition-colors font-['Plus_Jakarta_Sans'] font-bold tracking-tight" href="#">Market</a>
+</div>
+</div>
+<div class="flex-1 max-w-xl mx-8">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full bg-surface-container-highest border-none rounded-full py-2.5 pl-12 pr-4 text-sm focus:ring-2 focus:ring-primary/50 transition-all placeholder:text-outline" placeholder="What are the deals at Zara right now?" type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="hover:scale-95 transition-transform duration-200 p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">language</span>
+</button>
+<button class="hover:scale-95 transition-transform duration-200 p-2 text-on-surface-variant">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<button class="bg-gradient-to-br from-primary to-primary-container text-on-primary-fixed font-bold px-6 py-2.5 rounded-full hover:scale-95 transition-transform duration-200 shadow-lg shadow-primary/20">
+                    Add Assets
+                </button>
+</div>
+</div>
+</nav>
+<main class="max-w-screen-2xl mx-auto px-6 py-10">
+<!-- Bento Grid Container -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Full Width Hero Bento Card -->
+<div class="col-span-12 relative overflow-hidden rounded-lg bg-surface-container border border-outline-variant/10 p-10 flex flex-col justify-between min-h-[440px] piggy-glow">
+<div class="relative z-10">
+<div class="flex items-center gap-3 mb-6">
+<div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-3xl">account_balance_wallet</span>
+</div>
+<h1 class="text-4xl font-extrabold tracking-tight">Your Piggy Bank</h1>
+</div>
+<p class="text-on-surface-variant text-xl max-w-2xl leading-relaxed">
+                        Start your wealth journey by connecting your first asset. We'll track your deals, growth, and savings in real-time. Connect your accounts to see a unified view of your financial health.
+                    </p>
+</div>
+<div class="mt-12 relative z-10">
+<button class="group flex items-center gap-3 bg-gradient-to-br from-primary to-primary-container text-on-primary-fixed font-bold px-8 py-4 rounded-full text-lg hover:scale-95 transition-transform duration-200 shadow-xl shadow-primary/20">
+<span>Add Your First Asset</span>
+<span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</button>
+</div>
+<!-- Abstract Decorative Elements -->
+<div class="absolute -right-20 -bottom-20 w-80 h-80 bg-primary/10 rounded-full blur-[100px]"></div>
+<div class="absolute right-24 top-1/2 -translate-y-1/2 opacity-20 hidden md:block">
+<span class="material-symbols-outlined text-[320px] text-primary" style="font-variation-settings: 'wght' 100;">savings</span>
+</div>
+</div>
+<!-- Featured Deals Section -->
+<div class="col-span-12 mt-8">
+<div class="flex items-end justify-between mb-8">
+<div>
+<span class="text-primary font-bold tracking-widest uppercase text-xs">Curated for you</span>
+<h2 class="text-3xl font-extrabold tracking-tight mt-1">Top Deals of the Month</h2>
+</div>
+<button class="text-on-surface-variant hover:text-primary transition-colors flex items-center gap-2 font-bold">
+                        View All Deals
+                        <span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Nike Big Card -->
+<div class="md:col-span-2 lg:col-span-2 relative h-80 rounded-lg overflow-hidden group">
+<img alt="" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqnLxO9DoRJBWU06gbfLNyJRFlo-fYb_h9SzTxhWJ5q-bTPpqh_BvnW8pV3yCkn50H0WQUdUuLP4aKc2Ca8lcLoXyXj0q9iiAUoqAeIcfcPjOcbHktHN-U9CWobBpj43QAxHtPrY6Lu7bLhB7rabdAq9j23_BFWtDOzX0XawG-gIPR8uEyI9oSz6kRn9YOthrW03hCbIB-b5wh8gFsC9wx-B3lAJCyVK1JXvOm70JTDVKf1xULrVwmJ9pXRuqsy81_4cYGe878I_O2"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-10 w-full flex justify-between items-end">
+<div>
+<span class="bg-primary text-on-primary-fixed text-xs font-black px-3 py-1 rounded-full uppercase tracking-widest mb-4 inline-block">Flash Deal</span>
+<h3 class="text-4xl font-black text-white leading-tight">60% OFF Summer <br/>at Nike House</h3>
+</div>
+<button class="bg-white text-black font-bold h-14 w-14 rounded-full flex items-center justify-center hover:scale-110 transition-transform">
+<span class="material-symbols-outlined">shopping_cart</span>
+</button>
+</div>
+</div>
+<!-- Apple Store Card -->
+<div class="relative h-80 rounded-lg overflow-hidden group">
+<img alt="" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAao2EXIFG6o0wLN5XdznS-SD6AaNltws2i9AvYoNLgqKocVwd8fvN6eCznt4l335aVtYLY1i6p1tOqRILxISxvJcy_odzRvzKZnvFBlV1CCd6CKQVTlHPvDBU1ZjJKui09tMweNq2YYN1a-AgRT-tSyUliyApPP8k2TScAzUvrNYSXSWVAnc6ISVcXDFJ8NHDeDz1U5hMcFSkBNMWZZXyjE8UVJ1BGO-QgF3Okr-1XsYsiKSklbx7t-AMFEt1zn4CEGS7p3mhUPKF3"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent"></div>
+<div class="absolute bottom-0 left-0 p-8">
+<span class="text-secondary font-bold text-xs uppercase tracking-widest mb-2 block">Premium Tech</span>
+<h3 class="text-2xl font-bold text-white mb-4">30% OFF Apple Store</h3>
+<div class="flex items-center gap-2 text-white/70 text-sm">
+<span class="material-symbols-outlined text-sm">schedule</span>
+<span>Ends in 2 days</span>
+</div>
+</div>
+</div>
+<!-- Zara Card -->
+<div class="relative h-80 rounded-lg overflow-hidden group bg-surface-container">
+<div class="absolute inset-0 flex flex-col p-8 justify-between">
+<div class="flex justify-between items-start">
+<div class="w-12 h-12 rounded-full bg-white flex items-center justify-center">
+<span class="text-black font-black text-xs">ZARA</span>
+</div>
+<span class="bg-secondary-container text-on-secondary-container text-[10px] font-bold px-2 py-1 rounded">NEW</span>
+</div>
+<div>
+<h3 class="text-2xl font-bold mb-2">Exclusive Early Access</h3>
+<p class="text-on-surface-variant text-sm mb-6">Members get 15% extra on the new Spring Collection.</p>
+<button class="w-full py-3 border border-outline-variant rounded-full font-bold hover:bg-white hover:text-black transition-colors">Claim Invite</button>
+</div>
+</div>
+</div>
+<!-- Travel Card -->
+<div class="relative h-80 rounded-lg overflow-hidden group md:col-span-2">
+<img alt="" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-C7pmYIopcvSpd8B7_29SBt5ZtD6Aqe1j-MGAVP1aVzDhoI73Zi3ClMey0BgOo3EibdCbcrU1dI3Grevh4RK4AT6gQVPtRytvXLiJWS3vfHLC6_80mLeZMPOu7MQ5X_ytGUPEdD3X-DLJZbPZ2uTGoBSWeJwXa3kkpBCtbG2ATiCLQ--alcLY0SmxmuSOb2410WcW-i4XlnY1ADW7zUxgcDogR-qqQrNpKqjbg7mHM5yFcvaORfwdXQbKH4s3GzJGJuHyZ5GtIlh9"/>
+<div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/20 to-transparent"></div>
+<div class="absolute inset-0 p-10 flex flex-col justify-center max-w-md">
+<h3 class="text-3xl font-black text-white mb-4">Wanderlust Rewards</h3>
+<p class="text-white/80 mb-6">Unlock secret hotel rates up to 45% off in Bali and Santorini when you add your first travel asset.</p>
+<div class="flex gap-4">
+<button class="bg-tertiary text-on-tertiary font-bold px-6 py-2 rounded-full text-sm">Explore Flights</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Financial Health / Tip Card -->
+<div class="col-span-12 lg:col-span-6 rounded-lg bg-surface-container-highest p-8 flex gap-6 items-center border border-outline-variant/10">
+<div class="w-24 h-24 shrink-0 rounded-full border-4 border-dashed border-primary/30 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-4xl">lightbulb</span>
+</div>
+<div>
+<h4 class="text-lg font-bold mb-1">Pro Tip: Auto-Import</h4>
+<p class="text-on-surface-variant text-sm leading-relaxed">Connect your primary checking account to automatically categorize your spending and unlock personalized savings goals.</p>
+</div>
+</div>
+<!-- Community Card -->
+<div class="col-span-12 lg:col-span-6 rounded-lg bg-gradient-to-br from-surface-container to-surface-container-low p-8 border border-outline-variant/10">
+<div class="flex items-center justify-between">
+<div>
+<h4 class="text-lg font-bold">Join the Piggy Community</h4>
+<p class="text-on-surface-variant text-sm mt-1">12k+ users saved over $2M last month.</p>
+</div>
+<div class="flex -space-x-3">
+<img alt="" class="w-10 h-10 rounded-full border-2 border-surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCUMqPmwez5zb0boLAgKQufe4lXN0ap30IQI7Q9vVCELCBLZe8SVrnELvkmQcKM2Eg0hz8xogxC5HXamJawC7StTNCdrfnUhx-Hhv3U4gHenJu8m8qMGwmVHJVuaE0wBlc9NEthyLiQTVWCgqZvu0l8p_j-fcnBEOh6e7S3ab7cj6IDSt_goFu5hl_oJaw4qgdk2-iIvsQQEspL6Vnkzpgds-WeQOs0sa9u4V9RHUh5JsO8Q8y5YRGwxB-xG9ju89bxA3mOO3PaLNb7"/>
+<img alt="" class="w-10 h-10 rounded-full border-2 border-surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCv7IaFwMAN1oWneZdb55U-7b76GYZ3-vR_ZOub8XZwp_naUqScPM4ERgyPxC1OI9O4ODkYAVJEfCrRVTscTQWVGpMgHq1WinlrHy9nMub8bZltPBLJ4OWs83xSJi88LwXKiknLadAHN0W8TZNE7QjlQxYUGKeNf6aahgRA5SWBVvbG-6mSOK_96PLdb1VPJ_H3LcozjUNknc2ibcYrdkjOs3DtphG8v-Zo2PQS6rQLuLFBWJr3GUah8M9g1kj6KIzDlfKDcNc3V6js"/>
+<img alt="" class="w-10 h-10 rounded-full border-2 border-surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDkhZq5DVmULudnfZclnKt1sv8YpfHsqkLapUDEOPIP-0U93oayGi9Oo-b15x7phoX3uPhdytKt87FnFiGdc6tfyhqWZx2XId4pHonheefqYXrYqSLcaryC85M6khMBl3o0A4YGyW2v1qmBBxtu2ZGFnycgmNIIMaVFckzd21hxqhEPCIrwcOjLqV1R-Hw6Lo3aIbTva1F84cGgEwgWrgGm98W38Cbv242ETIht0WR3TzNOAytKn60AQa8twwTWrGCQW_53VRqu4ANO"/>
+<div class="w-10 h-10 rounded-full bg-surface-bright border-2 border-surface flex items-center justify-center text-[10px] font-bold">+9k</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Bottom Padding -->
+<div class="h-20"></div>
+</body></html>
