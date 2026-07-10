@@ -10,6 +10,7 @@
 
 # next.js
 /.next/
+/apps/**/.next/
 /out/
 
 # production
@@ -42,3 +43,5 @@ firebase-service-account.json
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel

@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Piggy - Search Results</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "error-dim": "#d73357",
+                        "background": "#0c0e11",
+                        "on-tertiary-fixed": "#003342",
+                        "error-container": "#a70138",
+                        "inverse-surface": "#f9f9fd",
+                        "on-surface-variant": "#aaabaf",
+                        "surface-container-highest": "#23262a",
+                        "surface-variant": "#23262a",
+                        "on-secondary": "#005c3f",
+                        "error": "#ff6e84",
+                        "surface-container-lowest": "#000000",
+                        "secondary-container": "#006c4b",
+                        "tertiary-dim": "#60c8f0",
+                        "on-error": "#490013",
+                        "outline": "#747579",
+                        "on-background": "#e8e8ec",
+                        "on-tertiary-container": "#00485d",
+                        "primary": "#ff89ad",
+                        "primary-dim": "#ff6b9d",
+                        "tertiary-fixed-dim": "#60c8f0",
+                        "on-tertiary": "#005269",
+                        "on-secondary-fixed": "#004730",
+                        "surface-container-high": "#1d2024",
+                        "primary-container": "#ff709f",
+                        "on-secondary-container": "#e0ffec",
+                        "surface-container-low": "#111317",
+                        "on-primary-fixed-variant": "#5d002b",
+                        "inverse-primary": "#ad2b5e",
+                        "on-primary-fixed": "#000000",
+                        "tertiary-fixed": "#70d6ff",
+                        "tertiary-container": "#70d6ff",
+                        "secondary-fixed-dim": "#47ecad",
+                        "outline-variant": "#46484b",
+                        "surface": "#0c0e11",
+                        "tertiary": "#9de1ff",
+                        "on-primary": "#62002e",
+                        "surface-dim": "#0c0e11",
+                        "on-primary-container": "#4c0022",
+                        "primary-fixed": "#ff709f",
+                        "on-surface": "#e8e8ec",
+                        "secondary-fixed": "#59faba",
+                        "secondary-dim": "#47ecad",
+                        "inverse-on-surface": "#535559",
+                        "surface-tint": "#ff89ad",
+                        "on-error-container": "#ffb2b9",
+                        "primary-fixed-dim": "#f16092",
+                        "surface-container": "#171a1d",
+                        "secondary": "#59faba",
+                        "surface-bright": "#292c31",
+                        "on-secondary-fixed-variant": "#006747",
+                        "on-tertiary-fixed-variant": "#005269"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "1rem",
+                        "lg": "2rem",
+                        "xl": "3rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {},
+                    "fontFamily": {
+                        "headline": ["Plus Jakarta Sans"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(23, 26, 29, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(70, 72, 75, 0.15);
+        }
+        .neon-glow {
+            text-shadow: 0 0 20px rgba(255, 137, 173, 0.6);
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface font-body min-h-screen flex flex-col antialiased selection:bg-primary-container selection:text-on-primary-container pb-28 md:pb-0">
+<!-- Top Navigation App Bar (Web / Mobile Hybrid) -->
+<header class="fixed top-0 w-full z-50 flex justify-between items-center px-6 py-4 bg-[#0c0e11]/40 backdrop-blur-xl shadow-[0_20px_40px_rgba(255,107,157,0.08)]">
+<div class="flex items-center gap-4 w-full">
+<span class="text-2xl font-black text-[#FF6B9D] italic font-headline tracking-tight">Piggy</span>
+<!-- Search Bar (Integrated as per intent, though normally a separate component, mimicking the search experience) -->
+<div class="flex-grow max-w-md mx-auto hidden md:block">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-highest border-none rounded-full py-3 pl-12 pr-4 text-body text-on-surface focus:ring-1 focus:ring-primary focus:outline-none placeholder-on-surface-variant/50 transition-all" placeholder="Search stores, deals..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-3 ml-auto">
+<button class="p-2 text-slate-400 hover:text-[#FF6B9D] hover:bg-white/10 hover:scale-105 transition-all rounded-full active:scale-95 duration-200 ease-in-out md:hidden">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-[#FF6B9D] hover:bg-white/10 hover:scale-105 transition-all rounded-full active:scale-95 duration-200 ease-in-out">
+<span class="material-symbols-outlined" data-icon="light_mode">light_mode</span>
+</button>
+<button class="p-2 text-slate-400 hover:text-[#FF6B9D] hover:bg-white/10 hover:scale-105 transition-all rounded-full active:scale-95 duration-200 ease-in-out">
+<span class="material-symbols-outlined" data-icon="language">language</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-24 px-6 md:px-12 max-w-7xl mx-auto w-full flex flex-col gap-8">
+<!-- Mobile Search Bar (Visible only on small screens) -->
+<div class="md:hidden relative w-full mb-2">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full bg-surface-container-highest border-none rounded-full py-4 pl-12 pr-4 text-body text-on-surface focus:ring-1 focus:ring-primary focus:outline-none placeholder-on-surface-variant/50 transition-all shadow-[0_4px_20px_rgba(0,0,0,0.3)]" placeholder="Coffee, electronics, clothes..." type="text" value="Coffee"/>
+</div>
+<!-- Hero: Potential Total Savings -->
+<section class="flex flex-col gap-6">
+<div class="flex flex-col gap-2">
+<h1 class="font-headline text-on-surface-variant text-sm tracking-widest uppercase font-medium">Potential Total Savings</h1>
+<div class="font-headline text-5xl md:text-6xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-white to-on-surface-variant drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                    $342<span class="text-3xl md:text-4xl text-on-surface-variant/50">.50</span>
+</div>
+</div>
+<!-- Swipable Asset/Category Icons -->
+<div class="flex gap-4 overflow-x-auto hide-scrollbar pb-4 -mx-6 px-6 md:mx-0 md:px-0">
+<button class="flex-shrink-0 flex flex-col items-center gap-2 group">
+<div class="w-16 h-16 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center shadow-[0_0_20px_rgba(255,137,173,0.3)] group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-white" data-icon="local_cafe" style="font-variation-settings: 'FILL' 1;">local_cafe</span>
+</div>
+<span class="text-xs font-label text-primary font-medium tracking-wide">Coffee</span>
+</button>
+<button class="flex-shrink-0 flex flex-col items-center gap-2 group">
+<div class="w-16 h-16 rounded-full glass-panel flex items-center justify-center group-hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-white transition-colors" data-icon="restaurant">restaurant</span>
+</div>
+<span class="text-xs font-label text-on-surface-variant group-hover:text-white transition-colors">Dining</span>
+</button>
+<button class="flex-shrink-0 flex flex-col items-center gap-2 group">
+<div class="w-16 h-16 rounded-full glass-panel flex items-center justify-center group-hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-white transition-colors" data-icon="shopping_bag">shopping_bag</span>
+</div>
+<span class="text-xs font-label text-on-surface-variant group-hover:text-white transition-colors">Retail</span>
+</button>
+<button class="flex-shrink-0 flex flex-col items-center gap-2 group">
+<div class="w-16 h-16 rounded-full glass-panel flex items-center justify-center group-hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-white transition-colors" data-icon="local_gas_station">local_gas_station</span>
+</div>
+<span class="text-xs font-label text-on-surface-variant group-hover:text-white transition-colors">Gas</span>
+</button>
+<button class="flex-shrink-0 flex flex-col items-center gap-2 group">
+<div class="w-16 h-16 rounded-full glass-panel flex items-center justify-center group-hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-white transition-colors" data-icon="more_horiz">more_horiz</span>
+</div>
+<span class="text-xs font-label text-on-surface-variant group-hover:text-white transition-colors">More</span>
+</button>
+</div>
+</section>
+<!-- Search Results Grid -->
+<section class="flex flex-col gap-6">
+<div class="flex justify-between items-end">
+<h2 class="font-headline text-2xl font-bold tracking-tight text-white">Nearby Deals</h2>
+<span class="text-sm text-on-surface-variant font-label">12 found</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Result Card 1 -->
+<article class="glass-panel rounded-lg p-5 flex flex-col gap-4 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+<!-- Subtle gradient glow behind card -->
+<div class="absolute -top-20 -right-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-colors pointer-events-none"></div>
+<div class="flex items-start justify-between z-10">
+<div class="flex gap-4 items-center">
+<div class="w-14 h-14 rounded-full bg-surface-container-lowest overflow-hidden border border-outline-variant/30 flex-shrink-0">
+<img alt="Cafe Shopfront" class="w-full h-full object-cover" data-alt="close-up of a modern artisanal coffee shop logo on a dark textured wall with warm spotlighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBIIfS5kYk8brh37pYRFWjsb0tK1GsiR_8qJQX2dQ1u_0bQ9pYW1jPqhlJCGvGlxC2Zdtd5Gpcs9Apw1S8lutzk57bxp-R48G87RNl9qd8aJP82xnD5cQZ-pUREhXXtwW6dYuv6sNYCvQTRhZlMV0LR7hx14ESH1PFClAN_yULbJ-XC-I2IYi0IcNEue6B6tlLGkuigzuncDldpYgykmNEx5RF6ME2ik5VJ0jnhNXPefv-goIpbzDcCQrItMzWocTBOVS5kdOUA200a"/>
+</div>
+<div class="flex flex-col">
+<h3 class="font-headline text-lg font-bold text-white leading-tight">Brew Haven</h3>
+<div class="flex items-center gap-1 text-xs text-on-surface-variant mt-1">
+<span class="material-symbols-outlined text-[14px] text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-medium text-white">4.8</span>
+<span class="mx-1">•</span>
+<span>0.2 mi</span>
+</div>
+</div>
+</div>
+</div>
+<div class="z-10 mt-2">
+<div class="inline-flex items-center gap-2 bg-surface-container-lowest rounded-full px-4 py-2 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-[18px]">loyalty</span>
+<span class="font-headline font-bold text-primary neon-glow text-sm">20% Cashback</span>
+</div>
+</div>
+<div class="flex justify-between items-center z-10 mt-2 pt-4 border-t border-outline-variant/20">
+<span class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Open till 8 PM
+                        </span>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined text-sm text-white">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Result Card 2 -->
+<article class="glass-panel rounded-lg p-5 flex flex-col gap-4 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+<div class="absolute -top-20 -right-20 w-40 h-40 bg-secondary/10 rounded-full blur-3xl group-hover:bg-secondary/20 transition-colors pointer-events-none"></div>
+<div class="flex items-start justify-between z-10">
+<div class="flex gap-4 items-center">
+<div class="w-14 h-14 rounded-full bg-surface-container-lowest overflow-hidden border border-outline-variant/30 flex-shrink-0">
+<img alt="Roasters Logo" class="w-full h-full object-cover" data-alt="minimalist espresso cup neon sign glowing white against a dark brick background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDyf0XUJwntzs0ePDQeusX5TKrYI5PzsfSjWsGTbKaT8CRCHlFGTiNEGDbhog32gEhBU2gzdOldtW6LVOHtmI45RFYzUK9QD22KhzsYHisGqHRb7iNx7j4y77N8UaoyoRdJt5A5kVCRLTT-KhcpRjEmPxXKaXatLEAWQCgNI2l8DZwGV-qCsWUIuXZZCSxZnUk0ZWt27a7gVGzlo82XEct1BHojhDpSW1-UxXOU9tRBGYto2lNfBOBN1qp2v94Py1JII5UQbNbfQy12"/>
+</div>
+<div class="flex flex-col">
+<h3 class="font-headline text-lg font-bold text-white leading-tight">Neon Roasters</h3>
+<div class="flex items-center gap-1 text-xs text-on-surface-variant mt-1">
+<span class="material-symbols-outlined text-[14px] text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-medium text-white">4.9</span>
+<span class="mx-1">•</span>
+<span>0.5 mi</span>
+</div>
+</div>
+</div>
+</div>
+<div class="z-10 mt-2">
+<div class="inline-flex items-center gap-2 bg-surface-container-lowest rounded-full px-4 py-2 border border-secondary/20">
+<span class="material-symbols-outlined text-secondary text-[18px]">local_fire_department</span>
+<span class="font-headline font-bold text-secondary text-sm drop-shadow-[0_0_10px_rgba(89,250,186,0.4)]">$5 Off Any Latte</span>
+</div>
+</div>
+<div class="flex justify-between items-center z-10 mt-2 pt-4 border-t border-outline-variant/20">
+<span class="text-xs text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Open till 6 PM
+                        </span>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined text-sm text-white">arrow_forward</span>
+</button>
+</div>
+</article>
+<!-- Result Card 3 -->
+<article class="glass-panel rounded-lg p-5 flex flex-col gap-4 relative overflow-hidden group hover:-translate-y-1 transition-transform duration-300">
+<div class="absolute -top-20 -right-20 w-40 h-40 bg-primary/10 rounded-full blur-3xl group-hover:bg-primary/20 transition-colors pointer-events-none"></div>
+<div class="flex items-start justify-between z-10">
+<div class="flex gap-4 items-center">
+<div class="w-14 h-14 rounded-full bg-surface-container-lowest overflow-hidden border border-outline-variant/30 flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl text-on-surface-variant">bakery_dining</span>
+</div>
+<div class="flex flex-col">
+<h3 class="font-headline text-lg font-bold text-white leading-tight">Crust &amp; Crumb</h3>
+<div class="flex items-center gap-1 text-xs text-on-surface-variant mt-1">
+<span class="material-symbols-outlined text-[14px] text-yellow-500" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="font-medium text-white">4.6</span>
+<span class="mx-1">•</span>
+<span>1.2 mi</span>
+</div>
+</div>
+</div>
+</div>
+<div class="z-10 mt-2">
+<div class="inline-flex items-center gap-2 bg-surface-container-lowest rounded-full px-4 py-2 border border-primary/20">
+<span class="material-symbols-outlined text-primary text-[18px]">redeem</span>
+<span class="font-headline font-bold text-primary neon-glow text-sm">Buy 1 Get 1 Free</span>
+</div>
+</div>
+<div class="flex justify-between items-center z-10 mt-2 pt-4 border-t border-outline-variant/20">
+<span class="text-xs text-error-dim flex items-center gap-1 font-medium">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Closes in 30m
+                        </span>
+<button class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center hover:bg-surface-bright transition-colors">
+<span class="material-symbols-outlined text-sm text-white">arrow_forward</span>
+</button>
+</div>
+</article>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation App Bar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-2 bg-[#111317]/40 backdrop-blur-2xl rounded-t-[2rem] shadow-[0_-10px_30px_rgba(0,0,0,0.5)]">
+<button class="flex flex-col items-center justify-center text-slate-500 hover:text-[#FF6B9D] transition-colors group">
+<span class="material-symbols-outlined mb-1 group-active:scale-90 transition-all duration-300" data-icon="grid_view">grid_view</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-500 hover:text-[#FF6B9D] transition-colors group">
+<span class="material-symbols-outlined mb-1 group-active:scale-90 transition-all duration-300" data-icon="account_balance_wallet">account_balance_wallet</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest">Savings</span>
+</button>
+<!-- Active Tab: Search -->
+<button class="flex flex-col items-center justify-center bg-gradient-to-br from-[#ff89ad] to-[#ff709f] text-white rounded-full p-3 shadow-[0_0_20px_rgba(255,137,173,0.4)] -mt-4 active:scale-90 transition-all duration-300">
+<span class="material-symbols-outlined" data-icon="search" style="font-variation-settings: 'FILL' 1;">search</span>
+</button>
+<!-- The label is hidden to maintain the aesthetic of the active floating button, or we show it below. Following the exact active style provided: "flex flex-col items-center justify-center bg-gradient-to-br from-[#ff89ad] to-[#ff709f] text-white rounded-full p-3 shadow-[0_0_20px_rgba(255,137,173,0.4)]". Label text inclusion isn't strictly defined in the active class, omitting for layout balance of the FAB-like center tab. -->
+<button class="flex flex-col items-center justify-center text-slate-500 hover:text-[#FF6B9D] transition-colors group">
+<span class="material-symbols-outlined mb-1 group-active:scale-90 transition-all duration-300" data-icon="person">person</span>
+<span class="font-['Inter'] text-[10px] font-medium uppercase tracking-widest">Profile</span>
+</button>
+</nav>
+</body></html>

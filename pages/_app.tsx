@@ -52,28 +52,39 @@ function MyApp({
   Component,
   pageProps: { session, ...pageProps },
 }: AppPropsWithLayout) {
-  if (Component.getCleanLayout) {
-    return (
-      <div className={poppins.className}>
-        <Component {...pageProps} />
-      </div>
-    );
-  }
-  return (
-    <div className={poppins.className}>
-      <ThemeProvider enableSystem={true} attribute="class">
-        {/* Session from page getServerSideProps avoids client fetch; refetchOnWindowFocus=false reduces extra /api/auth/session calls. */}
-        <SessionProvider session={session} refetchOnWindowFocus={false} refetchWhenOffline={false} refetchInterval={0}>
-          <RouteChangeIndicator />
-          <UserDataProvider>
-            <Main>
-              <Component {...pageProps} />
-            </Main>
-          </UserDataProvider>
-        </SessionProvider>
-      </ThemeProvider>
-    </div>
-  );
+  return   <div className={poppins.className}>
+  <ThemeProvider enableSystem={false} attribute="class" defaultTheme="dark" storageKey="piggy-theme">
+    <SessionProvider session={session} refetchOnWindowFocus={false} refetchWhenOffline={false} refetchInterval={0}>
+      <Component {...pageProps} />
+    </SessionProvider>
+  </ThemeProvider>
+</div>
+  // if (Component.getCleanLayout) {
+  //   return (
+  //     <div className={poppins.className}>
+  //       <ThemeProvider enableSystem={false} attribute="class" defaultTheme="dark" storageKey="piggy-theme">
+  //         <SessionProvider session={session} refetchOnWindowFocus={false} refetchWhenOffline={false} refetchInterval={0}>
+  //           <Component {...pageProps} />
+  //         </SessionProvider>
+  //       </ThemeProvider>
+  //     </div>
+  //   );
+  // }
+  // return (
+  //   <div className={poppins.className}>
+  //     <ThemeProvider enableSystem={true} attribute="class">
+  //       {/* Session from page getServerSideProps avoids client fetch; refetchOnWindowFocus=false reduces extra /api/auth/session calls. */}
+  //       <SessionProvider session={session} refetchOnWindowFocus={false} refetchWhenOffline={false} refetchInterval={0}>
+  //         <RouteChangeIndicator />
+  //         <UserDataProvider>
+  //           <Main>
+  //             <Component {...pageProps} />
+  //           </Main>
+  //         </UserDataProvider>
+  //       </SessionProvider>
+  //     </ThemeProvider>
+  //   </div>
+  // );
 }
 
 export default appWithTranslation(MyApp);

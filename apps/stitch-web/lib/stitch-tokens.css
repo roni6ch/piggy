@@ -1,0 +1,34 @@
+/**
+ * Stitch-style design tokens (M3-inspired). Tweak here to match your Stitch project.
+ */
+:root {
+  --stitch-primary: #6750a4;
+  --stitch-on-primary: #ffffff;
+  --stitch-primary-container: #eaddff;
+  --stitch-on-primary-container: #21005d;
+  --stitch-secondary-container: #e8def8;
+  --stitch-on-secondary-container: #1d192b;
+  --stitch-surface: #fdf8ff;
+  --stitch-on-surface: #1c1b1f;
+  --stitch-on-surface-variant: #49454f;
+  --stitch-surface-container: #f3edf7;
+  --stitch-surface-container-low: #f7f2fa;
+  --stitch-outline: #79747e;
+  --stitch-outline-variant: #cac4d0;
+}
+
+.dark {
+  --stitch-primary: #d0bcff;
+  --stitch-on-primary: #381e72;
+  --stitch-primary-container: #4f378b;
+  --stitch-on-primary-container: #eaddff;
+  --stitch-secondary-container: #4a4458;
+  --stitch-on-secondary-container: #e8def8;
+  --stitch-surface: #0f0b14;
+  --stitch-on-surface: #e6e1e6;
+  --stitch-on-surface-variant: #cac4d0;
+  --stitch-surface-container: #211f26;
+  --stitch-surface-container-low: #1d1b20;
+  --stitch-outline: #938f99;
+  --stitch-outline-variant: #49454f;
+}

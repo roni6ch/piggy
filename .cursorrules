@@ -11,3 +11,4 @@
 - **Interaction:** Every clickable element must have a clear `:active` state.
 - **Form UX:** Every input must have an associated `label` and correct `type` (email, tel, number).
 - **Layout:** Use `max-w-screen-xl` for desktop, but ensure padding `px-4` on mobile so content doesn't hit the screen edges.
+- **Terminal:** Default terminal is `bash`; provide shell commands in bash syntax unless user requests another shell.

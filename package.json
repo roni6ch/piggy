@@ -2,15 +2,21 @@
   "name": "nextjs-fullstack-app-template",
   "version": "0.1.0",
   "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
   "scripts": {
     "dev": "next dev",
+    "dev:stitch": "npm run dev -w piggy-stitch-web",
     "build": "next build",
-    "start": "next start",
+    "build:stitch": "npm run build -w piggy-stitch-web",
+    "start:stitch": "npm run start -w piggy-stitch-web",
     "lint": "next lint",
     "prettier": "prettier --write .",
     "prepare": "husky install",
     "postinstall": "patch-package",
-    "seed:firestore": "node scripts/seed-firestore.js"
+    "seed:firestore": "node scripts/seed-firestore.js",
+    "fetch:stitch": "node scripts/fetch-stitch-screens.mjs"
   },
   "dependencies": {
     "@emotion/react": "^11.13.3",
@@ -39,6 +45,7 @@
   "devDependencies": {
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
+    "@google/stitch-sdk": "^0.1.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20.17.6",
     "@types/react": "^18.3.12",
