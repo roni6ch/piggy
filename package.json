@@ -8,10 +8,9 @@
   "scripts": {
     "dev": "next dev",
     "dev:stitch": "npm run dev -w piggy-stitch-web",
-"build": "node -e \"if(process.env.VERCEL_ENV==='preview'){require('fs').writeFileSync('firebase-service-account.json', process.env.FIREBASE_SERVICE_ACCOUNT_JSON || ''); require('child_process').execSync('npm run build:stitch', {stdio: 'inherit'});} else {require('child_process').execSync('npm run build:stitch', {stdio: 'inherit'});}\"",    
-"start:stitch": "npm run start -w piggy-stitch-web",
+    "build": "node -e \"if(process.env.FIREBASE_SERVICE_ACCOUNT_JSON) { require('fs').writeFileSync('firebase-service-account.json', process.env.FIREBASE_SERVICE_ACCOUNT_JSON); } require('child_process').execSync('npm run build -w piggy-stitch-web', {stdio: 'inherit'});\"",
+"build:stitch": "npm run build -w piggy-stitch-web",
     "lint": "next lint",
-    "build:stitch": "npm run build -w piggy-stitch-web",
     "prettier": "prettier --write .",
     "prepare": "husky install",
     "postinstall": "patch-package",
