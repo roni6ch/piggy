@@ -19,20 +19,36 @@ export const authOptions: NextAuthOptions = {
       async authorize(credentials) {
         if (!credentials?.email || !credentials?.password) return null;
         const email = credentials.email.trim().toLowerCase();
+        
+        console.log('Attempting login for:', email);
         const user = await getUserByEmailWithPassword(email);
-        if (!user?.password) return null;
-
+        
+        if (!user) {
+          console.error('Database check: No user found matching email.');
+          return null;
+        }
+        if (!user.password) {
+          console.error('Database check: User exists but has no password field.');
+          return null;
+        }
+      
         const stored = user.password;
         const isBcrypt = typeof stored === 'string' && (stored.startsWith('$2a$') || stored.startsWith('$2b$'));
         let ok = false;
+        
         if (isBcrypt) {
           ok = await bcrypt.compare(credentials.password, stored);
-        } 
-       else if (process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV === 'preview') {
-        // Allow plain-text on dev and Vercel preview deployments for testing
-        ok = stored === credentials.password;
-      }
-        if (!ok) return null;
+        } else {
+          // Temporary fallback for ALL environments to catch plain-text hashes during testing
+          console.log('Stored password is plain text. Evaluating match...');
+          ok = stored === credentials.password;
+        }
+        
+        if (!ok) {
+          console.error('Password verification failed.');
+          return null;
+        }
+        
         return {
           id: String(user._id),
           email: user.email,
