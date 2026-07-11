@@ -27,10 +27,11 @@ export const authOptions: NextAuthOptions = {
         let ok = false;
         if (isBcrypt) {
           ok = await bcrypt.compare(credentials.password, stored);
-        } else if (process.env.NODE_ENV === 'development') {
-          // Dev only: allow plain-text password when stored value is not a bcrypt hash (e.g. manually added in Firebase)
-          ok = stored === credentials.password;
-        }
+        } 
+       else if (process.env.NODE_ENV === 'development' || process.env.VERCEL_ENV === 'preview') {
+        // Allow plain-text on dev and Vercel preview deployments for testing
+        ok = stored === credentials.password;
+      }
         if (!ok) return null;
         return {
           id: String(user._id),
